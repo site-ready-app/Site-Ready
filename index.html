@@ -285,6 +285,7 @@ main { padding-bottom: calc(64px + env(safe-area-inset-bottom)); }
  *   answer    indexes of correct options
  *   why       explanation shown after answering
  *   src       primary source {t: title, u: url}
+ *   fact      true for "key fact" questions (numbers, limits, colours, timescales)
  *   status    "draft" until checked by a qualified reviewer, then "reviewed" (all v2.0 questions reviewed, Sep 2026)
  */
 window.SECTIONS = {
@@ -389,7 +390,7 @@ window.QUESTIONS = [
   why:"Under CDM 2015 the principal contractor must make sure every worker receives a suitable site induction covering site-specific risks, rules and emergency procedures.",
   src:L.cdm, status:"reviewed" },
 
-{ id:"WE06", section:"we", topic:"Accident reporting", type:"single",
+{ id:"WE06", section:"we", topic:"Accident reporting", type:"single", fact:true,
   q:"A worker is injured on site and, as a result, cannot do their normal work for more than seven days in a row (not counting the day of the accident). Under RIDDOR, what must happen?",
   options:[
     "The injury must be reported to the enforcing authority within 15 days of the accident",
@@ -547,7 +548,7 @@ window.QUESTIONS = [
   why:"If you suspect asbestos, stop work straight away so you do not disturb it further, keep others away, and report it. It must be identified and, if necessary, removed by people trained to do so.",
   src:L.asb, status:"reviewed" },
 
-{ id:"OH05", section:"oh", topic:"Asbestos", type:"single",
+{ id:"OH05", section:"oh", topic:"Asbestos", type:"single", fact:true,
   q:"Which buildings could contain asbestos?",
   options:[
     "Any building built or refurbished before the year 2000",
@@ -569,7 +570,7 @@ window.QUESTIONS = [
   why:"HSE's rule of thumb is that if you have to raise your voice to have a normal conversation with someone about two metres away for at least part of the day, the noise probably needs to be assessed and controlled.",
   src:L.noise, status:"reviewed" },
 
-{ id:"OH07", section:"oh", topic:"Noise & vibration", type:"single",
+{ id:"OH07", section:"oh", topic:"Noise & vibration", type:"single", fact:true,
   q:"At what average daily noise exposure must your employer provide hearing protection and make sure it is worn?",
   options:[
     "85 dB(A)",
@@ -671,7 +672,7 @@ window.QUESTIONS = [
   src:L.hswa, status:"reviewed" },
 
 /* ===================== SAFETY ===================== */
-{ id:"SA01", section:"sa", topic:"Safety signs", type:"single",
+{ id:"SA01", section:"sa", topic:"Safety signs", type:"single", fact:true,
   q:"What does a sign of this shape and colour tell you?",
   img:"data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyMDAgMjAwIiByb2xlPSJpbWciIGFyaWEtbGFiZWw9IkJsdWUgY2lyY2xlIHdpdGggd2hpdGUgZXhjbGFtYXRpb24gbWFyayI+PHRpdGxlPk1hbmRhdG9yeSBzaWduIHNoYXBlIChnZW5lcmFsIG1hbmRhdG9yeSBhY3Rpb24pPC90aXRsZT48Y2lyY2xlIGN4PSIxMDAiIGN5PSIxMDAiIHI9IjkwIiBmaWxsPSIjMDA1Mzg3Ii8+PHJlY3QgeD0iODgiIHk9IjM4IiB3aWR0aD0iMjQiIGhlaWdodD0iODQiIHJ4PSIxMCIgZmlsbD0iI2ZmZiIvPjxjaXJjbGUgY3g9IjEwMCIgY3k9IjE0OCIgcj0iMTMiIGZpbGw9IiNmZmYiLz48L3N2Zz4K",
   options:[
@@ -683,7 +684,7 @@ window.QUESTIONS = [
   why:"Blue circular signs are mandatory signs: they tell you something you must do, such as wear a safety helmet.",
   src:L.signs, status:"reviewed" },
 
-{ id:"SA02", section:"sa", topic:"Safety signs", type:"single",
+{ id:"SA02", section:"sa", topic:"Safety signs", type:"single", fact:true,
   q:"What does a sign of this shape and colour tell you?",
   img:"data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyMDAgMjAwIiByb2xlPSJpbWciIGFyaWEtbGFiZWw9IlJlZCBjaXJjbGUgd2l0aCBkaWFnb25hbCBiYXIgb24gd2hpdGUiPjx0aXRsZT5Qcm9oaWJpdGlvbiBzaWduIHNoYXBlIChnZW5lcmFsIHByb2hpYml0aW9uKTwvdGl0bGU+PGNpcmNsZSBjeD0iMTAwIiBjeT0iMTAwIiByPSI5MCIgZmlsbD0iI2ZmZiIvPjxjaXJjbGUgY3g9IjEwMCIgY3k9IjEwMCIgcj0iODEiIGZpbGw9Im5vbmUiIHN0cm9rZT0iIzlCMjQyMyIgc3Ryb2tlLXdpZHRoPSIxOCIvPjxsaW5lIHgxPSI0Mi43IiB5MT0iNDIuNyIgeDI9IjE1Ny4zIiB5Mj0iMTU3LjMiIHN0cm9rZT0iIzlCMjQyMyIgc3Ryb2tlLXdpZHRoPSIxNiIvPjwvc3ZnPgo=",
   options:[
@@ -695,7 +696,7 @@ window.QUESTIONS = [
   why:"A red circle with a diagonal bar is a prohibition sign: it tells you something you must not do.",
   src:L.signs, status:"reviewed" },
 
-{ id:"SA03", section:"sa", topic:"Safety signs", type:"single",
+{ id:"SA03", section:"sa", topic:"Safety signs", type:"single", fact:true,
   q:"What does a sign of this shape and colour tell you?",
   img:"data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyMDAgMTgwIiByb2xlPSJpbWciIGFyaWEtbGFiZWw9IlllbGxvdyB0cmlhbmdsZSB3aXRoIGJsYWNrIGJvcmRlciBhbmQgYmxhY2sgZXhjbGFtYXRpb24gbWFyayI+PHRpdGxlPldhcm5pbmcgc2lnbiBzaGFwZSAoZ2VuZXJhbCB3YXJuaW5nKTwvdGl0bGU+PHBhdGggZD0iTTEwMCAxMCBMMTkwIDE2NiBMMTAgMTY2IFoiIGZpbGw9IiNGOUE4MDAiIHN0cm9rZT0iIzAwMCIgc3Ryb2tlLXdpZHRoPSIxNCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIvPjxyZWN0IHg9IjkxIiB5PSI2MiIgd2lkdGg9IjE4IiBoZWlnaHQ9IjYwIiByeD0iNyIgZmlsbD0iIzAwMCIvPjxjaXJjbGUgY3g9IjEwMCIgY3k9IjE0MSIgcj0iMTAiIGZpbGw9IiMwMDAiLz48L3N2Zz4K",
   options:[
@@ -707,7 +708,7 @@ window.QUESTIONS = [
   why:"A yellow triangle with a black border is a warning sign. It tells you about a hazard or danger.",
   src:L.signs, status:"reviewed" },
 
-{ id:"SA04", section:"sa", topic:"Safety signs", type:"single",
+{ id:"SA04", section:"sa", topic:"Safety signs", type:"single", fact:true,
   q:"What does this sign show?",
   img:"data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyMDAgMjAwIiByb2xlPSJpbWciIGFyaWEtbGFiZWw9IldoaXRlIGNyb3NzIG9uIGEgZ3JlZW4gc3F1YXJlIj48dGl0bGU+U2FmZSBjb25kaXRpb24gc2lnbiAoZmlyc3QgYWlkKTwvdGl0bGU+PHJlY3QgeD0iMiIgeT0iMiIgd2lkdGg9IjE5NiIgaGVpZ2h0PSIxOTYiIHJ4PSI4IiBmaWxsPSIjZmZmIi8+PHJlY3QgeD0iOCIgeT0iOCIgd2lkdGg9IjE4NCIgaGVpZ2h0PSIxODQiIHJ4PSI1IiBmaWxsPSIjMjM3RjUyIi8+PHJlY3QgeD0iNzgiIHk9IjQwIiB3aWR0aD0iNDQiIGhlaWdodD0iMTIwIiBmaWxsPSIjZmZmIi8+PHJlY3QgeD0iNDAiIHk9Ijc4IiB3aWR0aD0iMTIwIiBoZWlnaHQ9IjQ0IiBmaWxsPSIjZmZmIi8+PC9zdmc+Cg==",
   options:[
@@ -719,7 +720,7 @@ window.QUESTIONS = [
   why:"Green square or rectangular signs are safe condition signs. A white cross on green shows where first aid equipment or facilities are.",
   src:L.signs, status:"reviewed" },
 
-{ id:"SA05", section:"sa", topic:"Safety signs", type:"single",
+{ id:"SA05", section:"sa", topic:"Safety signs", type:"single", fact:true,
   q:"What does a red square or rectangular sign usually show?",
   options:[
     "The location of fire-fighting equipment, such as an extinguisher or alarm call point",
@@ -742,7 +743,7 @@ window.QUESTIONS = [
   why:"The 'fire triangle' is heat, fuel and oxygen. Removing any one of them will put out the fire, which is how different extinguishers work.",
   src:L.fire, status:"reviewed" },
 
-{ id:"SA07", section:"sa", topic:"Fire prevention", type:"single",
+{ id:"SA07", section:"sa", topic:"Fire prevention", type:"single", fact:true,
   q:"Which type of fire extinguisher is suitable for a fire in electrical equipment?",
   options:[
     "Carbon dioxide (CO2), with a black label",
@@ -775,7 +776,7 @@ window.QUESTIONS = [
   why:"Fires from hot work often start after the job finishes, from sparks that have landed in hidden places. Hot work permits normally require the area to be checked for a period afterwards.",
   src:L.hsg150, status:"reviewed" },
 
-{ id:"SA10", section:"sa", topic:"Electrical safety", type:"single",
+{ id:"SA10", section:"sa", topic:"Electrical safety", type:"single", fact:true,
   q:"Why are 110 volt tools and extension leads (usually with yellow plugs and cables) used on construction sites?",
   options:[
     "They greatly reduce the risk of a serious electric shock",
@@ -842,7 +843,7 @@ window.QUESTIONS = [
   why:"The Regulations set a hierarchy: avoid work at height where reasonably practicable; if not, prevent falls (e.g. guard rails, scaffolds); and then minimise the distance and consequences of any fall.",
   src:L.wah, status:"reviewed" },
 
-{ id:"HR02", section:"hr", topic:"Working at height", type:"single",
+{ id:"HR02", section:"hr", topic:"Working at height", type:"single", fact:true,
   q:"What is the correct angle for a leaning ladder?",
   options:[
     "One unit out at the base for every four units up (about 75°)",
@@ -864,7 +865,7 @@ window.QUESTIONS = [
   why:"Ladders are not banned, but HSE says they should only be used for low-risk, short-duration work where a risk assessment shows more suitable equipment (such as a tower or MEWP) is not justified.",
   src:L.ladder, status:"reviewed" },
 
-{ id:"HR04", section:"hr", topic:"Working at height", type:"single",
+{ id:"HR04", section:"hr", topic:"Working at height", type:"single", fact:true,
   q:"On a construction site, how often must a scaffold working platform be inspected by a competent person?",
   options:[
     "At least every 7 days, and after anything that could affect its safety (such as bad weather or alterations)",
@@ -1088,7 +1089,7 @@ window.QUESTIONS = [
   q:"Under RIDDOR, who is responsible for reporting an injury to an employee?",
   options:["The 'responsible person', usually the employer","The injured worker, as soon as they are able to","The first aider who treated the injury","The worker's GP"], answer:[0],
   why:"RIDDOR places the duty to report on the 'responsible person', normally the employer of the injured worker, or the self-employed person or person in control of the premises.", src:L.riddor, status:"reviewed" },
-{ id:"WE36", section:"we", topic:"Accident reporting", type:"single",
+{ id:"WE36", section:"we", topic:"Accident reporting", type:"single", fact:true,
   q:"How quickly must a death or specified injury be reported under RIDDOR?",
   options:["Without delay, followed by a written report within 10 days","Within one month of the accident","Only at the end of the project","Within 15 days of the accident, using the accident book entry"], answer:[0],
   why:"Deaths and specified injuries must be notified to the enforcing authority by the quickest practicable means without delay, with a report within 10 days.", src:L.riddor, status:"reviewed" },
@@ -1100,7 +1101,7 @@ window.QUESTIONS = [
   q:"Which TWO of these can be reportable occupational diseases under RIDDOR when a doctor links them to the person's work?",
   options:["Hand-arm vibration syndrome","Occupational dermatitis","A common cold","Hay fever","A sprained ankle from playing football"], answer:[0,1],
   why:"Reportable diseases include hand-arm vibration syndrome, carpal tunnel syndrome, occupational dermatitis and occupational asthma, when diagnosed and linked to a work activity.", src:L.riddor, status:"reviewed" },
-{ id:"WE39", section:"we", topic:"Accident reporting", type:"single",
+{ id:"WE39", section:"we", topic:"Accident reporting", type:"single", fact:true,
   q:"An injury keeps a worker off their normal duties for five days. What does RIDDOR require?",
   options:["The injury must be recorded, but it does not need to be reported","It must be reported to HSE within 24 hours by the injured worker themselves","Nothing at all","It must be reported to the police"], answer:[0],
   why:"Injuries causing more than three consecutive days' incapacity must be recorded. They only become reportable when the incapacity lasts more than seven days.", src:L.riddor, status:"reviewed" },
@@ -1193,7 +1194,7 @@ window.QUESTIONS = [
   q:"Which is the better way to clean up fine dust after cutting blocks indoors?",
   options:["Use a suitable dust-extracting vacuum (e.g. M- or H-class) or wet methods","Dry sweep it with a stiff broom, then bag it up","Blow it away with compressed air so the whole area clears of dust much more quickly","Leave it for the cleaners"], answer:[0],
   why:"Dry sweeping and compressed air throw fine silica dust back into the air you breathe. Use a suitable vacuum or wet cleaning.", src:L.coshh, status:"reviewed" },
-{ id:"OH17", section:"oh", topic:"Dust & fumes", type:"single",
+{ id:"OH17", section:"oh", topic:"Dust & fumes", type:"single", fact:true,
   q:"What type of respiratory protection is normally recommended for high-dust tasks such as cutting concrete, where RPE is needed?",
   options:["A properly fitted FFP3 mask or equivalent, as specified in the risk assessment","A paper 'nuisance dust' mask, changed every hour","A scarf over the nose and mouth","No mask, if you hold your breath while cutting"], answer:[0],
   why:"HSE guidance for construction dust is usually FFP3 or equivalent RPE, face-fit tested for tight-fitting masks, alongside controls at source.", src:L.rpe, status:"reviewed" },
@@ -1265,7 +1266,7 @@ window.QUESTIONS = [
   q:"How should foam earplugs be fitted?",
   options:["Roll them thin with clean hands and insert them well into the ear canal, holding them until they expand","Push them just into the entrance of the ear so they are easy to remove","Cut them in half so they fit more comfortably in the ear","Only put one in"], answer:[0],
   why:"Poorly fitted earplugs give much less protection. Follow the maker's instructions and use clean hands.", src:L.noise, status:"reviewed" },
-{ id:"OH35", section:"oh", topic:"Noise & vibration", type:"single",
+{ id:"OH35", section:"oh", topic:"Noise & vibration", type:"single", fact:true,
   q:"If a noise level increases by 3 dB, what happens to the noise energy?",
   options:["It doubles","It increases by 3%","It stays about the same","It halves"], answer:[0],
   why:"The decibel scale is logarithmic. A 3 dB increase doubles the noise energy, so small increases in level make a big difference to risk.", src:L.noise, status:"reviewed" },
@@ -1289,7 +1290,7 @@ window.QUESTIONS = [
   q:"You have been using vibrating tools for years and have started to get tingling in your fingers at night. What should you do?",
   options:["Report it to your employer and see a doctor or occupational health","Keep quiet in case you lose your job","Wear thicker gloves and carry on as normal","Use the tools more to toughen up your hands"], answer:[0],
   why:"Tingling and numbness can be early signs of HAVS or carpal tunnel syndrome. Early reporting allows action before the condition becomes permanent.", src:L.vib, status:"reviewed" },
-{ id:"OH41", section:"oh", topic:"Manual handling", type:"single",
+{ id:"OH41", section:"oh", topic:"Manual handling", type:"single", fact:true,
   q:"When assessing a manual handling task, what does TILE stand for?",
   options:["Task, Individual, Load, Environment","Time, Instruction, Lift, Effort","Training, Inspection, Lifting, Equipment","Tools, Injury, Location, Exposure"], answer:[0],
   why:"HSE uses TILE to help assess manual handling risks: the task, the individual doing it, the load and the environment.", src:L.mh, status:"reviewed" },
@@ -1534,7 +1535,7 @@ window.QUESTIONS = [
   options:["Good housekeeping: keeping walkways clear and tidying as you go","Wearing gloves and safety boots at all times","Walking faster through cluttered areas","Putting up more warning signs around the site and at the main gate"], answer:[0],
   why:"Keeping access routes clear, storing materials properly, removing waste and cleaning up spills stop most slips and trips.", src:L.hsg150, status:"reviewed" },
 /* ---------- v2: High-risk activities ---------- */
-{ id:"HR17", section:"hr", topic:"Working at height", type:"single",
+{ id:"HR17", section:"hr", topic:"Working at height", type:"single", fact:true,
   q:"On a working platform, what is the minimum height of the top guard rail required by the Work at Height Regulations?",
   options:["950 mm","500 mm","750 mm","1500 mm"], answer:[0],
   why:"The top guard rail must be at least 950 mm above the edge, with intermediate guard rails so that any unprotected gap is no more than 470 mm, plus toe boards.", src:L.wah, status:"reviewed" },
@@ -1554,7 +1555,7 @@ window.QUESTIONS = [
   q:"Before you climb a mobile tower, what should you check?",
   options:["That the wheels are locked, outriggers are fitted as required, and guard rails and toe boards are in place","Only that it reaches the height you need to work at","That it has been painted","Nothing, as long as someone else put it up earlier that day"], answer:[0],
   why:"Unlocked wheels, missing outriggers or missing edge protection are common causes of tower accidents. Check before use and look for an inspection record.", src:L.wah, status:"reviewed" },
-{ id:"HR22", section:"hr", topic:"Working at height", type:"single",
+{ id:"HR22", section:"hr", topic:"Working at height", type:"single", fact:true,
   q:"If a ladder's landing point has no other handhold, how far should the ladder extend above it?",
   options:["At least 1 metre","At least 10 cm","It should stop level with the landing","At least 3 metres"], answer:[0],
   why:"HSE guidance is that access ladders should extend at least 1 m above the landing point, unless there is another suitable handhold.", src:L.ladder, status:"reviewed" },
@@ -1646,7 +1647,7 @@ window.QUESTIONS = [
   q:"Why should plant operators wear the seat belt when one is fitted?",
   options:["If the machine overturns, the belt keeps them inside the protective cab or frame","It is only a legal formality","It stops the operator sliding about in the seat and accidentally knocking the controls","Only on public roads"], answer:[0],
   why:"Machines are fitted with roll-over protection. Without a seat belt, the operator can be thrown out and crushed.", src:L.trans, status:"reviewed" },
-{ id:"HR45", section:"hr", topic:"Site transport & lifting", type:"single",
+{ id:"HR45", section:"hr", topic:"Site transport & lifting", type:"single", fact:true,
   q:"How often must lifting accessories such as slings and shackles be thoroughly examined?",
   options:["At least every 6 months, or as set out in an examination scheme","Once every 5 years, or whenever they are moved to a new site","Only when new, as long as they are checked visually before each use","Only after an accident"], answer:[0],
   why:"Under LOLER, lifting accessories and equipment used to lift people must be thoroughly examined at least every 6 months, and other lifting equipment at least every 12 months, unless an examination scheme specifies otherwise.", src:L.loler, status:"reviewed" },
@@ -1682,15 +1683,15 @@ window.QUESTIONS = [
   q:"Where can you find detailed information about a hazardous product's dangers and safe handling?",
   options:["On its safety data sheet and in the COSHH assessment","On the price label or in the supplier's printed catalogue","On the delivery note","From the colour of the container"], answer:[0],
   why:"Suppliers must provide safety data sheets. Your employer's COSHH assessment explains the controls you must use.", src:L.coshh, status:"reviewed" },
-{ id:"HR54", section:"hr", topic:"Hazardous substances", type:"single",
+{ id:"HR54", section:"hr", topic:"Hazardous substances", type:"single", fact:true,
   q:"A product label shows a red-bordered diamond containing a skull and crossbones. What does this mean?",
   options:["The product is acutely toxic; it can cause serious harm or death","The product is flammable and must be kept well away from any heat","It is harmful to the environment only","It is safe to use without precautions"], answer:[0],
   why:"Under the CLP labelling system, the skull and crossbones pictogram indicates acute toxicity.", src:L.coshh, status:"reviewed" },
-{ id:"HR55", section:"hr", topic:"Hazardous substances", type:"single",
+{ id:"HR55", section:"hr", topic:"Hazardous substances", type:"single", fact:true,
   q:"A product label shows a red-bordered diamond with a flame. What does this mean?",
   options:["The product is flammable","The product is hot","The product is corrosive","The product is toxic to aquatic life"], answer:[0],
   why:"The flame pictogram warns of a flammable product. Keep it away from sources of ignition.", src:L.coshh, status:"reviewed" },
-{ id:"HR56", section:"hr", topic:"Hazardous substances", type:"single",
+{ id:"HR56", section:"hr", topic:"Hazardous substances", type:"single", fact:true,
   q:"A product label shows a red-bordered diamond with liquid dripping onto a hand and a surface. What does this mean?",
   options:["The product is corrosive and can burn skin and eyes","The product is flammable","The product is an irritant only","The product is safe to wash off your skin at the end of the day"], answer:[0],
   why:"The corrosion pictogram shows that a product can cause severe skin burns and eye damage, or corrode metals.", src:L.coshh, status:"reviewed" },
@@ -1709,7 +1710,192 @@ window.QUESTIONS = [
 { id:"HR60", section:"hr", topic:"Hazardous substances", type:"single",
   q:"Scenario: A container of an unknown liquid has been left on site with no label. What should you do?",
   options:["Leave it alone, keep others away and report it","Sniff it to find out what it is","Pour it down the drain","Use it if it looks like water"], answer:[0],
-  why:"Unknown substances could be harmful or flammable. Do not handle them; report them so they can be identified and disposed of safely.", src:L.coshh, status:"reviewed" }
+  why:"Unknown substances could be harmful or flammable. Do not handle them; report them so they can be identified and disposed of safely.", src:L.coshh, status:"reviewed" },
+/* ---------- v2.1: key-fact questions (numbers, limits, colours, timescales) ---------- */
+{ id:"WE61", section:"we", topic:"Accident reporting", type:"single", fact:true,
+  q:"An employer normally has 10 or more people working on the same premises. What must they provide under social security law?",
+  options:["An accident book (or electronic equivalent) where injuries can be recorded","A full-time nurse on site","A monthly written accident report sent to the local council and to HSE","Nothing, unless someone is seriously injured"], answer:[0],
+  why:"Regulation 25 of the Social Security (Claims and Payments) Regulations 1979 requires employers with 10 or more people normally employed on the same premises to keep an accident book, which can be kept electronically.", src:{ t:"Social Security (Claims and Payments) Regulations 1979, reg. 25", u:"https://www.legislation.gov.uk/uksi/1979/628/regulation/25" }, status:"draft" },
+{ id:"WE62", section:"we", topic:"Accident reporting", type:"single", fact:true,
+  q:"Under RIDDOR, for how long must records of reportable incidents be kept?",
+  options:["At least 3 years","At least 6 months","At least 12 months","Until the project finishes"], answer:[0],
+  why:"RIDDOR requires records of reportable injuries, diseases and dangerous occurrences to be kept for at least three years.", src:L.riddor, status:"draft" },
+{ id:"WE63", section:"we", topic:"Legal duties", type:"single", fact:true,
+  q:"What is an HSE improvement notice?",
+  options:["A formal notice requiring a breach of the law to be put right within a set time","An order that stops the work immediately until the inspector returns to site","A fine paid on the spot by the worker","A letter of advice with no legal force"], answer:[0],
+  why:"An improvement notice requires the dutyholder to remedy a breach within a stated period (at least 21 days). A prohibition notice stops an activity that risks serious personal injury.", src:L.hswa, status:"draft" },
+{ id:"WE64", section:"we", topic:"Legal duties", type:"single", fact:true,
+  q:"An HSE inspector finds a material breach of health and safety law on site. Under 'Fee for Intervention', who pays for the inspector's time?",
+  options:["The dutyholder who broke the law, such as the employer","The workers on site, shared equally between everyone named in the report","HSE pays in all cases","The local council"], answer:[0],
+  why:"Under Fee for Intervention, dutyholders found to be in material breach of the law pay for the time HSE spends identifying and helping put it right. If there is no material breach, there is no fee.", src:{ t:"HSE: What is Fee for Intervention?", u:"https://www.hse.gov.uk/fee-for-intervention/what-is-ffi.htm" }, status:"draft" },
+{ id:"WE65", section:"we", topic:"Legal duties", type:"single", fact:true,
+  q:"Under CDM 2015, when must a construction project be notified to HSE?",
+  options:["When it will last more than 30 working days with more than 20 workers at the same time, or exceed 500 person days","On every project, however small, before any work starts on site, including repairs","Only when the client is a public body","Only when demolition is involved"], answer:[0],
+  why:"Regulation 6 of CDM 2015 requires notification (form F10) where the work will last longer than 30 working days and have more than 20 workers working simultaneously at any point, or exceed 500 person days.", src:{ t:"CDM 2015, regulation 6", u:"https://www.legislation.gov.uk/uksi/2015/51/regulation/6" }, status:"draft" },
+{ id:"WE66", section:"we", topic:"Welfare & first aid", type:"single", fact:true,
+  q:"How long is a First Aid at Work or Emergency First Aid at Work certificate normally valid for?",
+  options:["3 years, with annual refresher training strongly recommended","1 year","5 years, after which a shorter refresher course is needed","For life"], answer:[0],
+  why:"FAW and EFAW certificates are valid for three years. HSE strongly recommends annual refresher training, and there is no grace period once a certificate expires.", src:{ t:"HSE L74 First aid at work (guidance)", u:"https://www.hse.gov.uk/pubns/books/l74.htm" }, status:"draft" },
+{ id:"WE67", section:"we", topic:"Environment & waste", type:"single", fact:true,
+  q:"Drain covers on some sites are colour coded. What does a blue mark usually mean?",
+  options:["Surface water drain, which usually flows straight to a river or stream","Foul drain, which flows to a sewage treatment works for cleaning","Drinking water supply","Gas main access"], answer:[0],
+  why:"Environment Agency guidance is that drains can be marked by type: blue for surface water and red for foul. Never let anything but clean rainwater enter a surface water drain.", src:{ t:"Environment Agency Yellow Fish guidance (businesses and constructors)", u:"https://assets.publishing.service.gov.uk/government/uploads/system/uploads/attachment_data/file/823247/Yellow_Fish_Guidance_Manual_-_pollution_prevention__Businesses_and_Constructors.pdf" }, status:"draft" },
+{ id:"WE68", section:"we", topic:"Environment & waste", type:"single", fact:true,
+  q:"Drain covers on some sites are colour coded. What does a red mark usually mean?",
+  options:["Foul drain, which flows to a sewage treatment works","Surface water drain","Fire hydrant","Do not use the drain in wet weather, as it may overflow onto the site"], answer:[0],
+  why:"Drains can be marked red for foul and blue for surface water. Knowing which is which matters when dealing with spills and washwater.", src:{ t:"Environment Agency Yellow Fish guidance (businesses and constructors)", u:"https://assets.publishing.service.gov.uk/government/uploads/system/uploads/attachment_data/file/823247/Yellow_Fish_Guidance_Manual_-_pollution_prevention__Businesses_and_Constructors.pdf" }, status:"draft" },
+{ id:"WE69", section:"we", topic:"Environment & waste", type:"single",
+  q:"You have used absorbent granules from a spill kit to soak up a diesel spill. How should they be disposed of?",
+  options:["As hazardous waste, in the container provided, following site arrangements","In the general waste skip","Swept into a surface water drain","Left spread on the ground to dry out, then swept into the general waste skip"], answer:[0],
+  why:"Absorbents contaminated with oil or fuel become hazardous waste and must be bagged or contained and disposed of properly.", src:L.epa, status:"draft" },
+{ id:"OH61", section:"oh", topic:"Noise & vibration", type:"single", fact:true,
+  q:"At what average daily noise exposure must your employer carry out a risk assessment, give you information and training, and make hearing protection available if you ask for it?",
+  options:["80 dB(A)","70 dB(A)","85 dB(A)","90 dB(A)"], answer:[0],
+  why:"80 dB(A) is the lower exposure action value. At 85 dB(A) (the upper action value) hearing protection must be provided and worn.", src:L.noise, status:"draft" },
+{ id:"OH62", section:"oh", topic:"Noise & vibration", type:"single", fact:true,
+  q:"What is the daily noise exposure limit value that must not be exceeded, taking account of hearing protection?",
+  options:["87 dB(A)","80 dB(A)","85 dB(A)","100 dB(A)"], answer:[0],
+  why:"The Control of Noise at Work Regulations set an exposure limit value of 87 dB(A) daily (and 140 dB(C) peak), which takes account of hearing protection worn.", src:L.noise, status:"draft" },
+{ id:"OH63", section:"oh", topic:"Noise & vibration", type:"single", fact:true,
+  q:"What is the daily exposure action value for hand-arm vibration, above which employers must take action to reduce exposure?",
+  options:["2.5 m/s² A(8)","5 m/s² A(8)","10 m/s² A(8)","0.5 m/s² A(8)"], answer:[0],
+  why:"The Control of Vibration at Work Regulations set a daily exposure action value of 2.5 m/s² A(8) and a limit value of 5 m/s² A(8) for hand-arm vibration.", src:{ t:"Control of Vibration at Work Regulations 2005, reg. 4", u:"https://www.legislation.gov.uk/uksi/2005/1093/regulation/4" }, status:"draft" },
+{ id:"OH64", section:"oh", topic:"Noise & vibration", type:"single", fact:true,
+  q:"What is the daily exposure limit value for hand-arm vibration, which must not be exceeded?",
+  options:["5 m/s² A(8)","2.5 m/s² A(8)","1.15 m/s² A(8)","25 m/s² A(8)"], answer:[0],
+  why:"The hand-arm vibration exposure limit value is 5 m/s² A(8). The action value is 2.5 m/s² A(8).", src:{ t:"Control of Vibration at Work Regulations 2005, reg. 4", u:"https://www.legislation.gov.uk/uksi/2005/1093/regulation/4" }, status:"draft" },
+{ id:"OH65", section:"oh", topic:"Asbestos", type:"single", fact:true,
+  q:"Roughly how many people die each year in Great Britain from asbestos-related diseases?",
+  options:["Around 5,000","Around 50","Around 500","Around 50,000"], answer:[0],
+  why:"HSE states that asbestos causes around 5,000 deaths every year, more than any other single work-related cause.", src:L.asb, status:"draft" },
+{ id:"OH66", section:"oh", topic:"Dust & fumes", type:"single", fact:true,
+  q:"Why is the finest construction dust (respirable dust) the most dangerous?",
+  options:["The particles are too small to see and can be breathed deep into the lungs","It is heavier and settles on your skin","It only causes eye irritation, which clears up quickly once you leave the dusty area","It is only dangerous if swallowed"], answer:[0],
+  why:"Respirable dust particles are invisible to the naked eye and reach the deepest parts of the lungs, where they cause lasting damage such as silicosis.", src:L.coshh, status:"draft" },
+{ id:"OH67", section:"oh", topic:"Health & wellbeing", type:"single", fact:true,
+  q:"What is the UK Chief Medical Officers' low-risk drinking guideline for adults?",
+  options:["No more than 14 units a week, spread over 3 or more days","No more than 2 units a day, every day","No more than 28 units a week","No more than 21 units a week for men and 14 units a week for women"], answer:[0],
+  why:"The NHS advises men and women not to drink more than 14 units a week on a regular basis, spread over three or more days.", src:{ t:"NHS: Calculating alcohol units", u:"https://www.nhs.uk/live-well/alcohol-advice/calculating-alcohol-units/" }, status:"draft" },
+{ id:"OH68", section:"oh", topic:"Health & wellbeing", type:"single", fact:true,
+  q:"Roughly how long does it take the average adult body to process one unit of alcohol?",
+  options:["About one hour","About ten minutes","About 24 hours","A good night's sleep removes it all"], answer:[0],
+  why:"One unit is about the amount the average adult can process in an hour, so after a heavy night you may still be over the limit the next morning.", src:{ t:"NHS: Calculating alcohol units", u:"https://www.nhs.uk/live-well/alcohol-advice/calculating-alcohol-units/" }, status:"draft" },
+{ id:"OH69", section:"oh", topic:"Health & wellbeing", type:"single",
+  q:"What is the role of a Mental Health First Aider at work?",
+  options:["To spot signs of mental ill health, listen, and guide someone towards professional support","To diagnose and treat mental illness","To decide whether someone is fit to work","To report people's problems to management so their workload can be changed"], answer:[0],
+  why:"Mental health first aiders are trained to recognise signs, offer initial support and signpost people to help. They are not therapists or doctors.", src:L.stress, status:"draft" },
+{ id:"OH70", section:"oh", topic:"Health & wellbeing", type:"single",
+  q:"Why can allergic (sensitisation) dermatitis, for example from cement, end a career in construction?",
+  options:["Once sensitised, even tiny amounts can trigger a reaction for the rest of your life","It always clears up after a week","It only affects your hands in summer","It can be cured by a single course of cream from the chemist, after which you are immune"], answer:[0],
+  why:"Some people become sensitised to substances such as chromium in cement. After that, even small exposures cause dermatitis, which can make it impossible to keep doing that work.", src:L.skin, status:"draft" },
+{ id:"SA63", section:"sa", topic:"Fire prevention", type:"single", fact:true,
+  q:"UK fire extinguishers have red bodies with a coloured band or label. Which colour identifies a foam extinguisher?",
+  options:["Cream","Blue","Black","Yellow"], answer:[0],
+  why:"Colour codes: water = red (no band), foam = cream, dry powder = blue, carbon dioxide (CO2) = black, wet chemical = yellow.", src:{ t:"BS EN 3 / BS 7863 extinguisher colour coding (summary)", u:"https://www.fireprotectiononline.co.uk/info/an-explanation-of-uk-fire-extinguisher-colour-coding/" }, status:"draft" },
+{ id:"SA64", section:"sa", topic:"Fire prevention", type:"single", fact:true,
+  q:"Which colour identifies a dry powder fire extinguisher?",
+  options:["Blue","Cream","Black","Green"], answer:[0],
+  why:"Dry powder extinguishers have a blue band or label. They can be used on many fire types but powder can be hard to see through and breathe in confined spaces.", src:{ t:"BS EN 3 / BS 7863 extinguisher colour coding (summary)", u:"https://www.fireprotectiononline.co.uk/info/an-explanation-of-uk-fire-extinguisher-colour-coding/" }, status:"draft" },
+{ id:"SA65", section:"sa", topic:"Fire prevention", type:"single", fact:true,
+  q:"A fire involves burning wood, paper and cardboard (a Class A fire). Which extinguisher is the most suitable?",
+  options:["Water (red)","Carbon dioxide (black)","Wet chemical (yellow) only","None; it must be left to burn out"], answer:[0],
+  why:"Class A fires involve solid materials such as wood and paper. Water (and foam) extinguishers are suitable. CO2 is mainly for electrical and flammable liquid fires.", src:{ t:"BS EN 2 fire classes / extinguisher guidance (summary)", u:"https://www.fireprotectiononline.co.uk/info/an-explanation-of-uk-fire-extinguisher-colour-coding/" }, status:"draft" },
+{ id:"SA66", section:"sa", topic:"Fire prevention", type:"single", fact:true,
+  q:"A Class B fire involves which type of material?",
+  options:["Flammable liquids, such as petrol, paint or solvents","Solid materials, such as wood and paper","Flammable metals","Cooking oils and fats"], answer:[0],
+  why:"Fire classes: A = solids, B = flammable liquids, C = flammable gases, D = metals, F = cooking oils and fats. Electrical fires are not given a class letter.", src:{ t:"BS EN 2 fire classes / extinguisher guidance (summary)", u:"https://www.fireprotectiononline.co.uk/info/an-explanation-of-uk-fire-extinguisher-colour-coding/" }, status:"draft" },
+{ id:"SA67", section:"sa", topic:"Fire prevention", type:"single", fact:true,
+  q:"According to HSE guidance, how long should a continuous fire watch be kept after hot work has finished?",
+  options:["At least one hour, with a further check later","5 minutes","Until the welder has packed away","A fire watch is only needed if sparks were seen"], answer:[0],
+  why:"HSG168 advises a continuous fire watch of the hot work area for at least an hour after hot work ends, followed by at least one more check later.", src:L.hsg168, status:"draft" },
+{ id:"SA68", section:"sa", topic:"Fire prevention", type:"single", fact:true,
+  q:"How should gas cylinders, such as acetylene and LPG, normally be stored and used?",
+  options:["Upright and secured so they cannot fall","Lying on their side so they cannot roll","Upside down to keep the valve clean","Any way at all, as long as they are stored outdoors in a secure compound"], answer:[0],
+  why:"HSG168 says cylinders should be secured in an upright position unless designed to be used in another position.", src:L.hsg168, status:"draft" },
+{ id:"SA69", section:"sa", topic:"Fire prevention", type:"single",
+  q:"How should petrol for site equipment be stored?",
+  options:["In small, approved and labelled containers, kept in a secure, ventilated flammables store away from ignition sources","In any empty plastic drinks bottle","In the site cabin, where it is warm","Next to the generator for convenience, in its original jerry can with the lid loose to let fumes out"], answer:[0],
+  why:"Petrol is highly flammable. Use approved containers, keep quantities to a minimum and store it in a designated, ventilated store away from sources of ignition.", src:L.hsg168, status:"draft" },
+{ id:"SA70", section:"sa", topic:"Fire prevention", type:"single",
+  q:"Why should halogen work lights be kept away from dust sheets, insulation and other combustible materials?",
+  options:["They get very hot and can set nearby materials alight","They use too much electricity and can trip the site supply","The light fades the materials","They attract insects"], answer:[0],
+  why:"Halogen lamps have very hot surfaces. Keep them clear of combustibles and never cover them.", src:L.hsg168, status:"draft" },
+{ id:"SA71", section:"sa", topic:"Electrical safety", type:"single", fact:true,
+  q:"On a UK construction site, what colour are the plugs and sockets for 110 V equipment?",
+  options:["Yellow","Blue","Red","White"], answer:[0],
+  why:"Industrial plugs and sockets are colour coded by voltage: yellow = 110 V, blue = 230 V, red = 400 V.", src:{ t:"BS EN / IEC 60309 industrial plug colour coding", u:"https://en.wikipedia.org/wiki/IEC_60309" }, status:"draft" },
+{ id:"SA72", section:"sa", topic:"Electrical safety", type:"single", fact:true,
+  q:"What colour are industrial plugs and sockets for 400 V (three-phase) supplies?",
+  options:["Red","Yellow","Blue","Green"], answer:[0],
+  why:"Yellow = 110 V, blue = 230 V, red = 400 V. Only competent people should connect equipment to 400 V supplies.", src:{ t:"BS EN / IEC 60309 industrial plug colour coding", u:"https://en.wikipedia.org/wiki/IEC_60309" }, status:"draft" },
+{ id:"SA73", section:"sa", topic:"Electrical safety", type:"single", fact:true,
+  q:"A 110 V site supply is 'centre-tapped to earth'. What is the maximum voltage to earth, and so the maximum shock voltage in most faults?",
+  options:["55 V","110 V","230 V","12 V"], answer:[0],
+  why:"With a centre-tapped transformer, each conductor is only 55 V from earth, which greatly reduces the severity of an electric shock.", src:L.hsg141, status:"draft" },
+{ id:"SA74", section:"sa", topic:"PPE", type:"single",
+  q:"How should a safety helmet be worn?",
+  options:["Straight on the head with the harness adjusted to fit, peak at the front","Tilted back so you can see upwards more easily","Over a hood or thick hat that stops it fitting properly","Loose, with the harness fully slackened so it can be taken off quickly in an emergency"], answer:[0],
+  why:"A helmet only protects you if it fits and is worn correctly. Adjust the harness to fit, wear it the right way round, and follow the manufacturer's instructions.", src:L.ppe, status:"draft" },
+{ id:"HR61", section:"hr", topic:"Working at height", type:"single", fact:true,
+  q:"HSE guidance says you should consider other equipment if a task needs you to stay up a ladder or stepladder for more than how long at a time?",
+  options:["30 minutes","5 minutes","2 hours","A full shift"], answer:[0],
+  why:"HSE recommends considering alternative equipment if a task would need you to stay on a ladder or stepladder for more than 30 minutes at a time. Risk assessment still comes first.", src:{ t:"HSE Work at height FAQs", u:"https://www.hse.gov.uk/work-at-height/faqs.htm" }, status:"draft" },
+{ id:"HR62", section:"hr", topic:"Working at height", type:"single", fact:true,
+  q:"When using a leaning ladder, which rungs should you not work from?",
+  options:["The top three rungs","The bottom three rungs","The middle rungs","Any rung above head height of the person footing it"], answer:[0],
+  why:"HSE guidance is not to work off the top three rungs, and to make sure the ladder extends at least 1 m (or three rungs) above where you are working, so you have a handhold.", src:{ t:"HSE Safe use of ladders and stepladders", u:"https://www.hse.gov.uk/work-at-height/ladders/types-of-ladder.htm" }, status:"draft" },
+{ id:"HR63", section:"hr", topic:"Working at height", type:"single", fact:true,
+  q:"On a stepladder, which steps should you not stand and work on unless there is a suitable handhold?",
+  options:["The top three steps (including the very top)","The bottom step","Any step above the first two, whether or not there is a handhold","The middle step"], answer:[0],
+  why:"HSE guidance: don't stand and work on the top three steps (including a step forming the very top) unless there is a suitable handhold.", src:{ t:"HSE Safe use of ladders and stepladders", u:"https://www.hse.gov.uk/work-at-height/ladders/types-of-ladder.htm" }, status:"draft" },
+{ id:"HR64", section:"hr", topic:"Working at height", type:"single", fact:true,
+  q:"On a working platform, what is the maximum unprotected gap allowed between guard rails (or between a guard rail and the toe board)?",
+  options:["470 mm","950 mm","150 mm","1 metre"], answer:[0],
+  why:"The Work at Height Regulations require a top guard rail at least 950 mm high, with intermediate protection so that no unprotected gap exceeds 470 mm.", src:{ t:"Work at Height Regulations 2005, Schedule 2", u:"https://www.legislation.gov.uk/uksi/2005/735/schedule/2" }, status:"draft" },
+{ id:"HR65", section:"hr", topic:"Site transport & lifting", type:"single", fact:true,
+  q:"How often must lifting equipment that is NOT used for lifting people (e.g. a crane or telehandler) be thoroughly examined, unless an examination scheme says otherwise?",
+  options:["At least every 12 months","At least every 5 years","Only when new, provided the operator checks it visually every day","At least every week"], answer:[0],
+  why:"LOLER requires thorough examination at least every 12 months for lifting equipment, and at least every 6 months for lifting accessories and equipment used to lift people, unless an examination scheme specifies otherwise.", src:L.loler, status:"draft" },
+{ id:"HR66", section:"hr", topic:"Site transport & lifting", type:"single",
+  q:"What is the difference between a LOLER 'thorough examination' and the routine checks you make before use?",
+  options:["A thorough examination is a detailed, recorded examination by a competent person at set intervals; pre-use checks are quick visual checks by the user","They are the same thing","A thorough examination is done by the user every morning","Pre-use checks are only needed if the equipment is new; after that, the thorough examination covers everything"], answer:[0],
+  why:"Thorough examinations are formal, recorded and carried out by a competent person. Users should still check equipment visually before each use.", src:L.loler, status:"draft" },
+{ id:"HR67", section:"hr", topic:"Excavations & services", type:"single", fact:true,
+  q:"HSE advises a safety zone at ground level around overhead power lines. How far should it extend horizontally from the nearest wire on either side?",
+  options:["6 metres","1 metre","2 metres","50 metres"], answer:[0],
+  why:"GS6 advises a safety zone extending 6 m horizontally from the nearest wire on either side, marked with barriers, and managing the risks for any work within 10 m.", src:{ t:"HSE GS6 Avoiding danger from overhead power lines", u:"https://www.hse.gov.uk/pubns/gs6.htm" }, status:"draft" },
+{ id:"HR68", section:"hr", topic:"Excavations & services", type:"single",
+  q:"Plant has to pass under overhead power lines. What are 'goalposts' used for?",
+  options:["To mark a safe crossing point with a height limit, using non-conducting material, so plant cannot get too close to the wires","To mark the site's football pitch","To support the power lines","To stop pedestrians crossing under the lines while plant is working nearby"], answer:[0],
+  why:"Where plant must pass under lines, fenced passageways with goalposts made of rigid, non-conducting material at each end act as height-limited gateways.", src:{ t:"HSE GS6 Avoiding danger from overhead power lines", u:"https://www.hse.gov.uk/pubns/gs6.htm" }, status:"draft" },
+{ id:"HR69", section:"hr", topic:"Excavations & services", type:"single", fact:true,
+  q:"Within roughly what distance of a located underground service should you stop using mechanical excavators and dig only with hand tools?",
+  options:["0.5 metres","5 metres","10 metres","It's fine to dig with an excavator right up to it"], answer:[0],
+  why:"HSG47 treats a zone of about 0.5 m around a located service as a no-machine zone. Only careful hand digging with suitable tools should be used there.", src:L.hsg47, status:"draft" },
+{ id:"HR70", section:"hr", topic:"Excavations & services", type:"single",
+  q:"A cable avoidance tool (CAT) is often used with a signal generator (a 'Genny'). Why?",
+  options:["The Genny puts a signal onto a cable or pipe so it can be traced, even if it is not carrying current","It powers the CAT's batteries","It switches the buried cable off at the substation so it is safe to dig near","It measures the depth of the excavation"], answer:[0],
+  why:"A CAT alone only detects services giving off a signal. A Genny applies a traceable signal so services that are dead or not radiating can be found.", src:L.hsg47, status:"draft" },
+{ id:"HR71", section:"hr", topic:"Excavations & services", type:"single",
+  q:"Is an excavation less than 1.2 metres deep always safe to work in without support?",
+  options:["No; even shallow excavations can collapse and cause serious injury, so the risk must be assessed","Yes; collapses only happen in deep trenches","Yes, if the soil is dry","Yes, if you only work in it for a short time and someone stands at the edge watching you"], answer:[0],
+  why:"There is no 'safe' depth. Even shallow trenches can collapse, especially when you are kneeling or bending. Support or batter the sides as the risk assessment requires.", src:L.hsg150, status:"draft" },
+{ id:"HR72", section:"hr", topic:"Hazardous substances", type:"single", fact:true,
+  q:"A product label shows a red-bordered diamond with an exclamation mark. What does it mean?",
+  options:["The product can cause less serious health effects such as irritation, skin sensitisation or harm if swallowed","The product is explosive","The product is safe to use without precautions","The product is under pressure and may burst if the container is dropped or heated"], answer:[0],
+  why:"The CLP exclamation-mark pictogram warns of hazards such as skin or eye irritation, skin sensitisation, and harm if swallowed or inhaled.", src:{ t:"HSE: Hazard pictograms (CLP)", u:"https://www.hse.gov.uk/chemical-classification/labelling-packaging/hazard-symbols-hazard-pictograms.htm" }, status:"draft" },
+{ id:"HR73", section:"hr", topic:"Hazardous substances", type:"single", fact:true,
+  q:"A product label shows a red-bordered diamond with the outline of a person and a star shape on their chest. What does it mean?",
+  options:["Serious long-term health hazard, such as causing cancer or breathing problems","The product is flammable","First aid equipment inside","The product is harmful to fish and plants only, so must not go down drains"], answer:[0],
+  why:"The CLP 'health hazard' pictogram warns of serious longer-term effects such as cancer, respiratory sensitisation or damage to organs.", src:{ t:"HSE: Hazard pictograms (CLP)", u:"https://www.hse.gov.uk/chemical-classification/labelling-packaging/hazard-symbols-hazard-pictograms.htm" }, status:"draft" },
+{ id:"HR74", section:"hr", topic:"Hazardous substances", type:"single", fact:true,
+  q:"A product label shows a red-bordered diamond with a dead tree and a dead fish. What does it mean?",
+  options:["The product is hazardous to the environment","The product is toxic only to plants","The product is biodegradable","The product must be stored outdoors, away from buildings and people"], answer:[0],
+  why:"The CLP environment pictogram means the product is hazardous to the aquatic environment. It must never go down drains.", src:{ t:"HSE: Hazard pictograms (CLP)", u:"https://www.hse.gov.uk/chemical-classification/labelling-packaging/hazard-symbols-hazard-pictograms.htm" }, status:"draft" },
+{ id:"HR75", section:"hr", topic:"Hazardous substances", type:"single", fact:true,
+  q:"A product label shows a red-bordered diamond with a gas cylinder. What does it mean?",
+  options:["The product is a gas under pressure, which may explode if heated","The product is flammable liquid","Empty containers can be refilled","The product contains compressed oxygen for breathing apparatus"], answer:[0],
+  why:"The CLP gas cylinder pictogram indicates a gas under pressure; it may explode if heated, and some are refrigerated and can cause cold burns.", src:{ t:"HSE: Hazard pictograms (CLP)", u:"https://www.hse.gov.uk/chemical-classification/labelling-packaging/hazard-symbols-hazard-pictograms.htm" }, status:"draft" }
 ];
 
 </script>
@@ -1718,7 +1904,7 @@ window.QUESTIONS = [
 (function () {
   "use strict";
 
-  var APP_VERSION = "2.0";
+  var APP_VERSION = "2.1";
   var STORE_KEY = "siteready.v1";
   var MOCK_QUESTIONS = 50;
   var MOCK_MINUTES = 45;
@@ -1801,8 +1987,8 @@ window.QUESTIONS = [
       return { id: id, order: shuffle(q.options.map(function (_, i) { return i; })), sel: [], done: false, flag: false };
     });
   }
-  function pickPractice(sections, count) {
-    var pool = QS.filter(function (q) { return sections.indexOf(q.section) >= 0; });
+  function pickPractice(sections, count, factsOnly) {
+    var pool = QS.filter(function (q) { return sections.indexOf(q.section) >= 0 && (!factsOnly || q.fact); });
     // favour questions seen less often, with randomness
     pool = pool.map(function (q) { return { q: q, k: qstat(q.id).a + Math.random() * 2 }; })
                .sort(function (x, y) { return x.k - y.k; }).map(function (x) { return x.q.id; });
@@ -1952,26 +2138,31 @@ window.QUESTIONS = [
   }
 
   VIEWS.practiceSetup = function () {
-    var chosen = Object.keys(SECTIONS), count = 10;
+    var chosen = Object.keys(SECTIONS), count = 10, factsOnly = false;
     function render() {
-      var avail = QS.filter(function (q) { return chosen.indexOf(q.section) >= 0; }).length;
+      var avail = QS.filter(function (q) { return chosen.indexOf(q.section) >= 0 && (!factsOnly || q.fact); }).length;
       var h = '<h1>Practice by topic</h1><p class="muted">Choose the sections to practise. You get feedback after each question.</p>' +
         '<div class="card stack"><h3>Sections</h3><div class="chips">' +
         Object.keys(SECTIONS).map(function (k) {
           var ag = aggregate(function (q) { return q.section === k; });
           return '<button class="chip" data-sec="' + k + '" aria-pressed="' + (chosen.indexOf(k) >= 0) + '">' + esc(SECTIONS[k]) + ' <span class="small">(' + ag.n + ')</span></button>';
         }).join("") + '</div>' +
+        '<h3>Questions</h3><div class="chips">' +
+        '<button class="chip" data-facts="0" aria-pressed="' + !factsOnly + '">All questions</button>' +
+        '<button class="chip" data-facts="1" aria-pressed="' + factsOnly + '">Key facts only</button></div>' +
+        '<p class="small muted" style="margin-top:6px">Key facts are the numbers, limits, colours and timescales worth learning by heart, such as noise levels, ladder rules and extinguisher colours.</p>' +
         '<h3>Number of questions</h3><div class="chips">' +
         [10, 20, 0].map(function (n) { return '<button class="chip" data-n="' + n + '" aria-pressed="' + (count === n) + '">' + (n ? n : "All (" + avail + ")") + '</button>'; }).join("") +
         '</div></div>' +
         '<div class="actions"><button class="btn ghost" data-go="home">Back</button>' +
-        '<button class="btn primary" id="start"' + (chosen.length ? '' : ' disabled') + '>Start practice</button></div>';
+        '<button class="btn primary" id="start"' + (chosen.length && avail ? '' : ' disabled') + '>Start practice</button></div>';
       app.innerHTML = h;
       app.querySelectorAll("[data-sec]").forEach(function (b) {
         b.onclick = function () { var k = b.getAttribute("data-sec"); var i = chosen.indexOf(k); if (i >= 0) chosen.splice(i, 1); else chosen.push(k); render(); };
       });
       app.querySelectorAll("[data-n]").forEach(function (b) { b.onclick = function () { count = +b.getAttribute("data-n"); render(); }; });
-      document.getElementById("start").onclick = function () { startSession("practice", pickPractice(chosen, count)); };
+      app.querySelectorAll("[data-facts]").forEach(function (b) { b.onclick = function () { factsOnly = b.getAttribute("data-facts") === "1"; render(); }; });
+      document.getElementById("start").onclick = function () { startSession("practice", pickPractice(chosen, count, factsOnly)); };
     }
     render();
   };
