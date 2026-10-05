@@ -70,7 +70,8 @@ body {
   font: 16px/1.5 system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
   -webkit-text-size-adjust: 100%;
 }
-button { font: inherit; color: inherit; }
+button { font: inherit; color: inherit; touch-action: manipulation; -webkit-user-select: none; user-select: none; -webkit-touch-callout: none; -webkit-tap-highlight-color: transparent; }
+html { touch-action: manipulation; }  /* stops quick taps being treated as double-tap-to-zoom on phones */
 :focus-visible { outline: 3px solid var(--focus); outline-offset: 2px; }
 
 .topbar {
@@ -207,6 +208,10 @@ table.hist td.num, table.hist th.num { text-align: right; font-variant-numeric: 
 .review-item.good { border-color: var(--good); }
 .review-item.bad { border-color: var(--bad); }
 .review-item p { margin: 4px 0; }
+.qid { display: inline-block; font-weight: 700; font-size: .8rem; padding: 1px 8px; border-radius: 6px; background: var(--brand); color: #fff; margin-right: 8px; letter-spacing: .3px; }
+.qid.flagged { background: var(--accent); color: var(--accent-ink); }
+.small-btn { min-height: 36px; padding: 6px 12px; font-size: .85rem; margin-top: 8px; }
+#query[aria-pressed="true"] { color: var(--good); border-color: var(--good); }
 
 .modal { position: fixed; inset: 0; background: rgba(0,0,0,.45); display: grid; place-items: center; padding: 16px; z-index: 50; }
 .modal[hidden] { display: none; }
@@ -1904,7 +1909,7 @@ window.QUESTIONS = [
 (function () {
   "use strict";
 
-  var APP_VERSION = "2.1";
+  var APP_VERSION = "2.2";
   var STORE_KEY = "siteready.v1";
   var MOCK_QUESTIONS = 50;
   var MOCK_MINUTES = 45;
@@ -1923,11 +1928,11 @@ window.QUESTIONS = [
 
   /* ---------------- storage ---------------- */
   var memoryStore = null;  // fallback if storage is blocked
-  function blankState() { return { q: {}, history: [], active: null, settings: { theme: "auto" } }; }
+  function blankState() { return { q: {}, history: [], active: null, queries: [], settings: { theme: "auto" } }; }
   function load() {
     try {
       var raw = window.localStorage.getItem(STORE_KEY);
-      if (raw) { var s = JSON.parse(raw); if (s && s.q) { s.history = s.history || []; s.settings = s.settings || { theme: "auto" }; return s; } }
+      if (raw) { var s = JSON.parse(raw); if (s && s.q) { s.history = s.history || []; s.queries = s.queries || []; s.settings = s.settings || { theme: "auto" }; return s; } }
     } catch (e) { /* storage unavailable */ }
     return memoryStore || blankState();
   }
@@ -1972,6 +1977,11 @@ window.QUESTIONS = [
     s.last = Date.now();
     state.q[id] = s;
   }
+
+  /* Questions flagged to review or query (kept until the user removes them) */
+  function hasQuery(id) { return state.queries.some(function (x) { return x.id === id; }); }
+  function addQuery(id) { if (!hasQuery(id)) { state.queries.push({ id: id, at: Date.now() }); save(); } }
+  function removeQuery(id) { state.queries = state.queries.filter(function (x) { return x.id !== id; }); save(); }
 
   function isCorrect(item) {
     var q = BY_ID[item.id];
@@ -2202,7 +2212,8 @@ window.QUESTIONS = [
       var ok = isCorrect(item);
       h += '<div class="feedback ' + (ok ? "good" : "bad") + '" role="status"><h3>' + (ok ? "Correct" : "Not quite") + '</h3>' +
         '<p>' + esc(q.why) + '</p>' +
-        '<p class="src">Source: <a href="' + esc(q.src.u) + '" target="_blank" rel="noopener">' + esc(q.src.t) + '</a> · Question ID: <b>' + esc(q.id) + '</b></p></div>';
+        '<p class="src">Source: <a href="' + esc(q.src.u) + '" target="_blank" rel="noopener">' + esc(q.src.t) + '</a> · Question ID: <b>' + esc(q.id) + '</b></p>' +
+        '<button class="btn ghost small-btn" id="query" aria-pressed="' + hasQuery(q.id) + '">' + (hasQuery(q.id) ? "&#10003; In your query list" : "Flag this question to query") + '</button></div>';
     }
     h += '</div>';
 
@@ -2229,15 +2240,30 @@ window.QUESTIONS = [
     }
 
     app.innerHTML = h;
+    var shownAt = Date.now();
+    // Ignore a second tap that lands on the new button within a moment of the screen changing
+    // (e.g. a quick double tap on "Check answer" would otherwise also press "Next question").
+    function guarded(fn) { return function () { if (Date.now() - shownAt < 400) return; fn(); }; }
 
     // bind options
     app.querySelectorAll("[data-opt]").forEach(function (b) {
       b.onclick = function () { toggle(+b.getAttribute("data-opt")); };
     });
     bind("check", checkAnswer);
-    bind("next", function () { if (isMock || s.idx < s.items.length - 1) { s.idx++; afterMove(); } else finishPractice(); });
+    var goNext = function () { if (isMock || s.idx < s.items.length - 1) { s.idx++; afterMove(); } else finishPractice(); };
+    bind("next", isMock ? goNext : guarded(goNext));  // in practice, "Next" appears exactly where "Check answer" was
     bind("prev", function () { s.idx--; afterMove(); });
-    bind("flag", function () { item.flag = !item.flag; persistActive(); renderQuestion(); });
+    bind("flag", function () {
+      item.flag = !item.flag;
+      if (item.flag) addQuery(item.id); else removeQuery(item.id);
+      persistActive(); refreshSelection();
+    });
+    bind("query", function () {
+      if (hasQuery(item.id)) removeQuery(item.id); else addQuery(item.id);
+      var b = document.getElementById("query");
+      b.setAttribute("aria-pressed", hasQuery(item.id));
+      b.innerHTML = hasQuery(item.id) ? "&#10003; In your query list" : "Flag this question to query";
+    });
     bind("finish", finishMockConfirm);
     bind("quit", function () {
       var answered = s.items.filter(function (i) { return i.done; }).length;
@@ -2260,7 +2286,24 @@ window.QUESTIONS = [
     else if (at >= 0) item.sel.splice(at, 1);
     else { item.sel.push(i); if (item.sel.length > need) item.sel.shift(); }
     if (s.mode === "mock") persistActive();
-    renderQuestion();
+    refreshSelection();
+  }
+
+  /* Update the current screen in place after a tap (rebuilding the whole page under the
+     user's finger can make the next quick tap get lost on phones). */
+  function refreshSelection() {
+    var s = session, item = s.items[s.idx], q = BY_ID[item.id];
+    app.querySelectorAll("[data-opt]").forEach(function (b) {
+      b.setAttribute("aria-pressed", item.sel.indexOf(+b.getAttribute("data-opt")) >= 0);
+    });
+    var chk = document.getElementById("check");
+    if (chk) chk.disabled = item.sel.length !== q.answer.length;
+    var fl = document.getElementById("flag");
+    if (fl) { fl.setAttribute("aria-pressed", item.flag); fl.textContent = item.flag ? "Unflag" : "Flag for review"; }
+    var nb = app.querySelector('[data-jump="' + s.idx + '"]');
+    if (nb) { nb.classList.toggle("answered", item.sel.length > 0); nb.classList.toggle("flagged", !!item.flag); }
+    var sum = app.querySelector("details.nav summary");
+    if (sum) sum.textContent = "Question list (" + s.items.filter(function (i) { return i.sel.length; }).length + " answered, " + s.items.filter(function (i) { return i.flag; }).length + " flagged)";
   }
 
   function checkAnswer() {
@@ -2381,14 +2424,15 @@ window.QUESTIONS = [
       '<button class="btn primary" data-go="progress">View progress</button></span></div>';
 
     if (isMock) {
-      h += '<h2>Review your answers</h2>' + items.map(function (it, i) {
+      var nflag = items.filter(function (it) { return it.flag; }).length;
+      h += '<h2>Review your answers</h2>' + (nflag ? '<p class="small muted">' + nflag + ' flagged question' + (nflag > 1 ? 's are' : ' is') + ' saved in your <b>query list</b> on the Progress page.</p>' : '') + items.map(function (it, i) {
         var q = BY_ID[it.id], ok = isCorrect(it);
         var yours = it.sel.length ? it.sel.map(function (x) { return esc(q.options[it.order[x]]); }).join("; ") : "<i>Not answered</i>";
         var right = q.answer.map(function (x) { return esc(q.options[x]); }).join("; ");
-        return '<div class="review-item ' + (ok ? "good" : "bad") + '"><p><b>' + (i + 1) + '. ' + esc(q.q) + '</b></p>' +
+        return '<div class="review-item ' + (ok ? "good" : "bad") + '"><p><span class="qid">' + esc(q.id) + '</span>' + (it.flag ? '<span class="qid flagged">Flagged</span>' : '') + '</p><p><b>' + (i + 1) + '. ' + esc(q.q) + '</b></p>' +
           (q.img ? '<img class="qimg" style="width:80px;height:80px;margin:4px 0" src="' + esc(q.img) + '" alt="Safety sign">' : '') +
           '<p class="small">Your answer: ' + yours + '</p>' + (ok ? '' : '<p class="small">Correct answer: <b>' + right + '</b></p>') +
-          '<p class="small muted">' + esc(q.why) + ' (Question ID: ' + esc(q.id) + ')</p></div>';
+          '<p class="small muted">' + esc(q.why) + '</p></div>';
       }).join("");
     }
     session = null;
@@ -2401,15 +2445,50 @@ window.QUESTIONS = [
       '<span class="track"><i class="' + cls + '" style="width:' + p + '%"></i><span class="pass" title="90% pass mark"></span></span></div>';
   }
 
+  /* ---------------- query list ---------------- */
+  function queriesHtml() {
+    var list = state.queries.filter(function (x) { return BY_ID[x.id]; });
+    if (!list.length) return '';
+    return '<div class="card" style="margin:12px 0 20px"><h2 style="margin-top:0">Questions to query (' + list.length + ')</h2>' +
+      '<p class="small muted">Questions you flagged in a mock exam or practice. Use the ID when telling the person who shared the app about a problem.</p>' +
+      list.map(function (x) {
+        var q = BY_ID[x.id];
+        return '<div class="review-item"><p><span class="qid">' + esc(q.id) + '</span><span class="small muted">' + esc(SECTIONS[q.section]) + ' · ' + esc(q.topic) + '</span></p>' +
+          '<p><b>' + esc(q.q) + '</b></p><p class="small">App\'s answer: ' + q.answer.map(function (a) { return esc(q.options[a]); }).join("; ") + '</p>' +
+          '<button class="btn ghost small-btn" data-unquery="' + esc(q.id) + '">Remove</button></div>';
+      }).join("") +
+      '<div class="row" style="margin-top:12px"><button class="btn" id="copy-queries">Copy list</button><button class="btn ghost" id="clear-queries">Clear list</button>' +
+      '<span class="small muted" id="copy-msg" role="status"></span></div>' +
+      '<textarea id="query-text" readonly hidden style="width:100%;margin-top:8px;min-height:90px"></textarea></div>';
+  }
+  function queriesText() {
+    return state.queries.filter(function (x) { return BY_ID[x.id]; }).map(function (x) { var q = BY_ID[x.id]; return q.id + " - " + q.q; }).join("\n");
+  }
+  function bindQueries() {
+    app.querySelectorAll("[data-unquery]").forEach(function (b) { b.onclick = function () { removeQuery(b.getAttribute("data-unquery")); VIEWS.progress(); }; });
+    bind("clear-queries", function () {
+      confirmBox("Clear the query list?", "This removes all flagged questions from the list. Your answers and scores are not affected.", "Clear", "Cancel")
+        .then(function (ok) { if (ok) { state.queries = []; save(); VIEWS.progress(); } });
+    });
+    bind("copy-queries", function () {
+      var txt = "Site Ready " + APP_VERSION + " - questions to query:\n" + queriesText(), msg = document.getElementById("copy-msg");
+      function fallback() { var ta = document.getElementById("query-text"); ta.hidden = false; ta.value = txt; ta.focus(); ta.select(); msg.textContent = "Select and copy the text below."; }
+      try {
+        if (navigator.clipboard && window.isSecureContext) navigator.clipboard.writeText(txt).then(function () { msg.textContent = "Copied. Paste it into a message or email."; }, fallback);
+        else fallback();
+      } catch (e) { fallback(); }
+    });
+  }
+
   /* ---------------- progress ---------------- */
   VIEWS.progress = function () {
     var all = aggregate(function () { return true; });
     var mocks = state.history.filter(function (h) { return h.mode === "mock"; });
-    var h = '<h1>My progress</h1>';
+    var h = '<h1>My progress</h1>' + queriesHtml();
     if (!all.a) {
       h += '<div class="card"><p>No answers yet. Start with <b>Practice by topic</b> and your strengths and weaknesses will show here.</p>' +
         '<button class="btn primary" data-go="practiceSetup">Start practising</button></div>';
-      app.innerHTML = h; return;
+      app.innerHTML = h; bindQueries(); return;
     }
     // readiness
     var last3 = mocks.slice(-3), ready = last3.length === 3 && last3.every(function (m) { return m.correct / m.total >= PASS_RATE; });
@@ -2444,6 +2523,7 @@ window.QUESTIONS = [
 
     h += '<h2>Reset</h2><p class="small muted">Deletes all answers and mock results on this device.</p><button class="btn danger" id="reset">Reset all progress</button>';
     app.innerHTML = h;
+    bindQueries();
     bind("reset", function () {
       confirmBox("Reset all progress?", "This deletes all your answers and mock results on this device. It can't be undone.", "Reset", "Cancel")
         .then(function (ok) { if (ok) { var theme = state.settings.theme; state = blankState(); state.settings.theme = theme; save(); go("progress"); } });
@@ -2459,7 +2539,7 @@ window.QUESTIONS = [
       '<p><b>It is not produced, checked or endorsed by CITB or CSCS.</b> The questions are original. They are written from UK health and safety law and HSE guidance, and they are not copies of the real test questions. The real test also includes other question styles, such as behavioural case studies. For official material, see CITB\'s revision products.</p>' +
       '<p>Health and safety law and guidance change. Always follow your site rules and your employer\'s instructions.</p>' +
       '<p><b>Privacy:</b> the app works offline. Your answers are stored only in this browser on this device. Nothing is sent anywhere.</p>' +
-      '<p><b>Spotted a problem?</b> Every question shows a Question ID (e.g. WE03) after you answer it. Note the ID and tell the person who shared the app with you.</p>' +
+      '<p><b>Spotted a problem?</b> Every question shows a Question ID (e.g. WE03) after you answer it. Flag it (in a mock) or tap "Flag this question to query" (in practice), and it is saved in the query list on the Progress page, ready to copy and send to the person who shared the app with you.</p>' +
       '<p class="small muted">Version ' + APP_VERSION + ' · ' + QS.length + ' questions · ' + QS.filter(function (q) { return q.status === "reviewed"; }).length + ' reviewed by a qualified person</p></div>' +
       '<h2>Appearance</h2><div class="chips">' +
       [["auto", "Match device"], ["light", "Light"], ["dark", "Dark"]].map(function (o) { return '<button class="chip" data-theme="' + o[0] + '" aria-pressed="' + (t === o[0]) + '">' + o[1] + '</button>'; }).join("") + '</div>' +
