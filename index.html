@@ -244,6 +244,31 @@ table.hist td.num, table.hist th.num { text-align: right; font-variant-numeric: 
   .actions #prev, .actions #flag { min-width: 56px; font-size: 1.15rem; }
 }
 main { padding-bottom: calc(64px + env(safe-area-inset-bottom)); }
+
+/* ---- v2.4 home screen colour ---- */
+:root { --info-bg: #e7eefb; --info-ink: #1f4fa3; --amber-bg: #fff1d6; --amber-ink: #8a5a00; --green-bg: #e4f4ea; --green-ink: #1d7a46; --red-bg: #fbe7e5; --red-ink: #b3261e; }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) { --info-bg: #1b2740; --info-ink: #9fbdf5; --amber-bg: #3a2e12; --amber-ink: #ffcf66; --green-bg: #16301f; --green-ink: #7fdba6; --red-bg: #3a1b1a; --red-ink: #ff9a90; } }
+:root[data-theme="dark"] { --info-bg: #1b2740; --info-ink: #9fbdf5; --amber-bg: #3a2e12; --amber-ink: #ffcf66; --green-bg: #16301f; --green-ink: #7fdba6; --red-bg: #3a1b1a; --red-ink: #ff9a90; }
+.stat em { display: block; font-style: normal; font-size: .75rem; font-weight: 700; margin-top: 2px; }
+.stat.t-good { background: var(--green-bg); border-color: transparent; } .stat.t-good b, .stat.t-good em { color: var(--green-ink); }
+.stat.t-mid { background: var(--amber-bg); border-color: transparent; } .stat.t-mid b, .stat.t-mid em { color: var(--amber-ink); }
+.stat.t-low { background: var(--red-bg); border-color: transparent; } .stat.t-low b, .stat.t-low em { color: var(--red-ink); }
+.stat.t-info { background: var(--info-bg); border-color: transparent; } .stat.t-info b, .stat.t-info em { color: var(--info-ink); }
+.stat.t-none em { color: var(--muted); font-weight: 400; }
+.key-dot { display: inline-block; width: 10px; height: 10px; border-radius: 3px; vertical-align: middle; margin: 0 2px 0 6px; }
+.key-dot.t-good { background: var(--green-ink); } .key-dot.t-mid { background: var(--amber-ink); } .key-dot.t-low { background: var(--red-ink); }
+.mode { border-left-width: 6px; display: flex; flex-direction: column; }
+.mode .tag { align-self: flex-start; }
+.mode .cta { margin-top: 10px; font-weight: 700; font-size: .95rem; }
+.mode.m-mock { background: var(--brand); border-color: var(--brand); border-left-color: var(--accent); color: #fff; }
+.mode.m-mock p { color: rgba(255,255,255,.85); }
+.mode.m-mock .cta { align-self: flex-start; background: var(--accent); color: var(--accent-ink); padding: 8px 14px; border-radius: 8px; }
+.mode.m-mock:hover { filter: brightness(1.12); border-color: var(--brand); border-left-color: var(--accent); }
+.mode.m-practice { border-left-color: var(--primary); } .mode.m-practice .cta { color: var(--primary); }
+.mode.m-weak { border-left-color: #e08a00; } .mode.m-weak .cta { color: var(--amber-ink); }
+.mode.m-progress { border-left-color: var(--green-ink); } .mode.m-progress .cta { color: var(--green-ink); }
+@media (min-width: 640px) { .mode.wide { grid-column: 1 / -1; } }
+
 @media print { .topbar, .actions { display: none; } }
 
 </style>
@@ -1911,7 +1936,7 @@ window.QUESTIONS = [
 (function () {
   "use strict";
 
-  var APP_VERSION = "2.3.1";
+  var APP_VERSION = "2.4";
   var STORE_KEY = "siteready.v1";
   var MOCK_QUESTIONS = 50;
   var MOCK_MINUTES = 45;
@@ -2104,23 +2129,27 @@ window.QUESTIONS = [
       h += '<div class="banner bad">Your browser is blocking storage, so progress will be lost when you close this page.</div>';
     }
 
+    // Traffic-light tiles: green = at or above the 90% pass mark, amber = 75-89%, red = below 75%
+    var acc = all.a >= MIN_ANSWERS_FOR_TILE ? pct(all.c, all.a) : null;
+    var cover = pct(all.seen, all.n);
     h += '<div class="grid four" style="margin:16px 0">' +
-      stat(all.seen + "/" + all.n, "questions seen") +
-      stat(all.a ? pct(all.c, all.a) + "%" : "–", "practice accuracy") +
-      stat(mocks.length, "mocks taken") +
-      stat(mockAvg === null ? "–" : mockAvg + "%", "last 3 mocks avg") + '</div>';
+      stat(all.seen + "/" + all.n, "questions seen", !all.seen ? "t-none" : cover >= 90 ? "t-good" : "t-mid", !all.seen ? "Start with Practice" : cover >= 90 ? "Nearly all seen" : cover >= 50 ? "Over halfway" : "Keep going") +
+      stat(acc === null ? "–" : acc + "%", "practice accuracy", toneFor(acc), acc === null ? "Answer " + MIN_ANSWERS_FOR_TILE + "+ to rate" : toneLabel(acc)) +
+      stat(mocks.length, "mocks taken", "t-info", mocks.length ? "" : "Try your first") +
+      stat(mockAvg === null ? "–" : mockAvg + "%", "last 3 mocks avg", toneFor(mockAvg), mockAvg === null ? "No mocks yet" : toneLabel(mockAvg)) + '</div>';
 
     h += '<div class="grid two">' +
-      mode("practice", "Practice by topic", "Pick sections, answer questions and see the explanation straight away.") +
-      mode("weak", "Work on weak areas", "Targets questions you got wrong and your weakest topics.", weakTopics.length ? weakTopics.length + " weak topic" + (weakTopics.length > 1 ? "s" : "") : "") +
-      mode("mock", "Mock exam", MOCK_QUESTIONS + " questions, " + MOCK_MINUTES + " minutes, pass mark 90%. Results at the end, like the real test.") +
-      mode("progress", "My progress", "Strengths and weaknesses by section and topic, and your mock history.") +
+      mode("mock", "Start a mock exam", MOCK_QUESTIONS + " questions in " + MOCK_MINUTES + " minutes, pass mark 90%. Results at the end, like the real test.", "", "m-mock wide", "Start mock exam &#8594;") +
+      mode("practice", "Practise by topic", "Pick sections or key facts, answer questions and see the explanation straight away.", "", "m-practice", "Start practising &#8594;") +
+      mode("weak", "Work on weak areas", "Brings back questions you got wrong and your weakest topics.", weakTopics.length ? weakTopics.length + " weak topic" + (weakTopics.length > 1 ? "s" : "") : "", "m-weak", "Practise weak areas &#8594;") +
+      mode("progress", "My progress", "Strengths and weaknesses by section and topic, mock history and your query list.", "", "m-progress wide", "View progress &#8594;") +
       '</div>';
 
     h += '<h2>How to use this app</h2><ol class="small">' +
       '<li>Work through each section in <b>Practice</b> until you have seen every question.</li>' +
       '<li>Use <b>Weak areas</b> daily. It brings back the questions you get wrong.</li>' +
       '<li>Sit a <b>Mock exam</b>. Aim to score 90% or more in at least three mocks in a row before booking the real test.</li></ol>' +
+      '<p class="small muted">Tile colours: <span class="key-dot t-good"></span> 90% or more (pass mark) · <span class="key-dot t-mid"></span> 75–89% · <span class="key-dot t-low"></span> below 75%.</p>' +
       '<p class="small muted">Unofficial revision aid. Not produced or endorsed by CITB or CSCS. Version ' + APP_VERSION + ', ' + QS.length + ' questions.</p>';
 
     app.innerHTML = h;
@@ -2132,10 +2161,16 @@ window.QUESTIONS = [
         .then(function (ok) { if (ok) { state.active = null; save(); go("home"); } });
     };
   };
-  function stat(v, l) { return '<div class="card stat"><b>' + esc(v) + '</b><span>' + esc(l) + '</span></div>'; }
-  function mode(id, title, text, tag) {
-    return '<button class="mode" data-mode="' + id + '">' + (tag ? '<span class="tag">' + esc(tag) + '</span>' : '') +
-      '<h3>' + esc(title) + '</h3><p>' + esc(text) + '</p></button>';
+  var MIN_ANSWERS_FOR_TILE = 20;
+  function toneFor(p) { return p === null ? "t-none" : p >= 90 ? "t-good" : p >= 75 ? "t-mid" : "t-low"; }
+  function toneLabel(p) { return p >= 90 ? "Test ready" : p >= 75 ? "Getting there" : "Keep practising"; }
+  function stat(v, l, tone, note) {
+    return '<div class="card stat ' + (tone || "") + '"><b>' + esc(v) + '</b><span>' + esc(l) + '</span>' +
+      (note ? '<em>' + esc(note) + '</em>' : '') + '</div>';
+  }
+  function mode(id, title, text, tag, cls, cta) {
+    return '<button class="mode ' + (cls || "") + '" data-mode="' + id + '">' + (tag ? '<span class="tag">' + esc(tag) + '</span>' : '') +
+      '<h3>' + esc(title) + '</h3><p>' + esc(text) + '</p>' + (cta ? '<span class="cta">' + cta + '</span>' : '') + '</button>';
   }
   function bindModes() {
     app.querySelectorAll("[data-mode]").forEach(function (b) {
