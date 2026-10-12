@@ -211,6 +211,7 @@ table.hist td.num, table.hist th.num { text-align: right; font-variant-numeric: 
 .qid { display: inline-block; font-weight: 700; font-size: .8rem; padding: 1px 8px; border-radius: 6px; background: var(--brand); color: #fff; margin-right: 8px; letter-spacing: .3px; }
 .qid.flagged { background: var(--accent); color: var(--accent-ink); }
 .small-btn { min-height: 36px; padding: 6px 12px; font-size: .85rem; margin-top: 8px; }
+#flag[aria-pressed="true"] { background: var(--accent); border-color: var(--accent); color: var(--accent-ink); }
 #query[aria-pressed="true"] { color: var(--good); border-color: var(--good); }
 
 .modal { position: fixed; inset: 0; background: rgba(0,0,0,.45); display: grid; place-items: center; padding: 16px; z-index: 50; }
@@ -229,17 +230,18 @@ table.hist td.num, table.hist th.num { text-align: right; font-variant-numeric: 
 }
 /* Phones: keep the answer buttons within thumb reach */
 @media (max-width: 640px) {
-  .actions.sticky {
-    position: sticky; bottom: 0; z-index: 5;
-    margin: 16px -16px 0; padding: 10px 16px calc(10px + env(safe-area-inset-bottom));
-    background: var(--bg); border-top: 1px solid var(--line);
-  }
-  .actions.sticky .btn { flex: 1 1 auto; }
-  .actions.sticky .row { flex: 1 1 100%; flex-wrap: nowrap; }
-  .actions.sticky .btn { min-height: 44px; padding: 8px 10px; font-size: .95rem; white-space: nowrap; }
+  /* Action bar sits directly under the answers (not pinned to the screen edge): pinned bars on
+     phones can drift out of line with where taps land while the browser toolbar moves. */
+  .actions.sticky { flex-wrap: nowrap; align-items: center; }
+  .actions.sticky .row { flex-wrap: nowrap; }
+  .actions.sticky .btn { min-height: 48px; padding: 8px 12px; font-size: .95rem; white-space: nowrap; }
 }
 @media (max-width: 360px) {
   .brand-text { display: none; }
+}
+@media (max-width: 400px) {
+  .actions .lbl { display: none; }   /* icon-only Previous / Flag on small phones so Next fits */
+  .actions #prev, .actions #flag { min-width: 56px; font-size: 1.15rem; }
 }
 main { padding-bottom: calc(64px + env(safe-area-inset-bottom)); }
 @media print { .topbar, .actions { display: none; } }
@@ -1909,7 +1911,7 @@ window.QUESTIONS = [
 (function () {
   "use strict";
 
-  var APP_VERSION = "2.2";
+  var APP_VERSION = "2.3.1";
   var STORE_KEY = "siteready.v1";
   var MOCK_QUESTIONS = 50;
   var MOCK_MINUTES = 45;
@@ -2191,7 +2193,7 @@ window.QUESTIONS = [
     var title = { practice: "Practice", weak: "Weak areas", mock: "Mock exam" }[s.mode];
 
     var h = '<div class="qhead"><span>' + esc(title) + ' · Question ' + (s.idx + 1) + ' of ' + s.items.length + '</span>' +
-      (isMock ? '<span class="timer" id="timer" aria-label="Time remaining"></span>' : '<span>' + esc(SECTIONS[q.section]) + '</span>') + '</div>' +
+      (isMock ? '<span class="row" style="flex-wrap:nowrap"><span class="timer" id="timer" aria-label="Time remaining"></span><button class="btn ghost small-btn" style="margin-top:0;white-space:nowrap" id="finish">Finish</button></span>' : '<span>' + esc(SECTIONS[q.section]) + '</span>') + '</div>' +
       '<div class="progressbar" aria-hidden="true"><i style="width:' + pct(s.idx + (item.done ? 1 : 0), s.items.length) + '%"></i></div>' +
       '<div class="card">' +
       '<div class="qtext" id="qtext">' + esc(q.q) + '</div>' +
@@ -2220,10 +2222,10 @@ window.QUESTIONS = [
     // actions
     h += '<div class="actions sticky">';
     if (isMock) {
-      h += '<span class="row"><button class="btn" id="prev"' + (s.idx ? '' : ' disabled') + '>Previous</button>' +
-        '<button class="btn" id="flag" aria-pressed="' + item.flag + '">' + (item.flag ? "Unflag" : "Flag for review") + '</button></span>' +
-        '<span class="row">' + (s.idx < s.items.length - 1 ? '<button class="btn primary" id="next">Next</button>' : '') +
-        '<button class="btn accent" id="finish">Finish exam</button></span>';
+      // Previous and Flag on the left, Next (or Finish on the last question) bottom right
+      h += '<span class="row"><button class="btn" id="prev"' + (s.idx ? '' : ' disabled') + ' aria-label="Previous question">&#8592;<span class="lbl"> Previous</span></button>' +
+        '<button class="btn" id="flag" aria-label="Flag this question" aria-pressed="' + item.flag + '">&#9873;<span class="lbl">' + (item.flag ? " Flagged" : " Flag") + '</span></button></span>' +
+        (s.idx < s.items.length - 1 ? '<button class="btn primary" id="next">Next &#8594;</button>' : '<button class="btn accent" id="finish-last">Finish exam</button>');
     } else {
       h += '<button class="btn ghost" id="quit">End session</button>';
       if (!item.done) h += '<button class="btn primary" id="check"' + (item.sel.length === need ? '' : ' disabled') + '>Check answer</button>';
@@ -2236,7 +2238,7 @@ window.QUESTIONS = [
         s.items.map(function (it, i) {
           var c = (it.sel.length ? "answered " : "") + (it.flag ? "flagged " : "") + (i === s.idx ? "current" : "");
           return '<button class="' + c + '" data-jump="' + i + '" aria-label="Question ' + (i + 1) + (it.sel.length ? ", answered" : "") + (it.flag ? ", flagged" : "") + '">' + (i + 1) + '</button>';
-        }).join("") + '</div></details>';
+        }).join("") + '</div><p class="small muted" style="margin:8px 0 0">Tap a number to go to that question. Bold = answered, yellow border = flagged.</p></details>';
     }
 
     app.innerHTML = h;
@@ -2265,6 +2267,7 @@ window.QUESTIONS = [
       b.innerHTML = hasQuery(item.id) ? "&#10003; In your query list" : "Flag this question to query";
     });
     bind("finish", finishMockConfirm);
+    bind("finish-last", finishMockConfirm);
     bind("quit", function () {
       var answered = s.items.filter(function (i) { return i.done; }).length;
       if (!answered) { session = null; go("home"); return; }
@@ -2299,7 +2302,7 @@ window.QUESTIONS = [
     var chk = document.getElementById("check");
     if (chk) chk.disabled = item.sel.length !== q.answer.length;
     var fl = document.getElementById("flag");
-    if (fl) { fl.setAttribute("aria-pressed", item.flag); fl.textContent = item.flag ? "Unflag" : "Flag for review"; }
+    if (fl) { fl.setAttribute("aria-pressed", item.flag); fl.innerHTML = '&#9873;<span class="lbl">' + (item.flag ? " Flagged" : " Flag") + '</span>'; }
     var nb = app.querySelector('[data-jump="' + s.idx + '"]');
     if (nb) { nb.classList.toggle("answered", item.sel.length > 0); nb.classList.toggle("flagged", !!item.flag); }
     var sum = app.querySelector("details.nav summary");
@@ -2384,7 +2387,14 @@ window.QUESTIONS = [
     var fl = s.items.filter(function (i) { return i.flag; }).length;
     var msg = (un ? un + " question" + (un > 1 ? "s" : "") + " not answered. " : "All questions answered. ") +
       (fl ? fl + " flagged for review. " : "") + "Once you finish you can't change your answers.";
-    confirmBox("Finish the exam?", msg, "Finish", "Keep going").then(function (ok) { if (ok) finishMock(false); });
+    confirmBox("Finish the exam?", msg + " To check answers first, tap \u201cGo back and check\u201d and pick any question from the list.", "Finish", "Go back and check")
+      .then(function (ok) {
+        if (ok) { finishMock(false); return; }
+        // Open the question list so any question can be revisited
+        s.navOpen = true; renderQuestion();
+        var nav = app.querySelector("details.nav");
+        if (nav && nav.scrollIntoView) nav.scrollIntoView({ block: "start" });
+      });
   }
   function finishMock(timedOut) {
     var s = session; if (!s || s.finished) return;

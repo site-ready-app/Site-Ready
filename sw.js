@@ -1,5 +1,5 @@
-/* Site Ready offline support. Version 2.2 (1cb18d3fc2) */
-var CACHE = "site-ready-1cb18d3fc2";
+/* Site Ready offline support. Version 2.3.1 (efab86e6c6) */
+var CACHE = "site-ready-efab86e6c6";
 var FILES = ["./", "index.html", "manifest.webmanifest", "icons/icon-192.png", "icons/icon-512.png", "icons/icon-maskable-512.png", "icons/apple-touch-icon.png"];
 self.addEventListener("install", function (e) {
   e.waitUntil(caches.open(CACHE).then(function (c) { return c.addAll(FILES); }).then(function () { return self.skipWaiting(); }));
