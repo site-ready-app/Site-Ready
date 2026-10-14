@@ -1,8 +1,10 @@
-/* Site Ready offline support. Version 2.4 (ff6ad0d2cd) */
-var CACHE = "site-ready-ff6ad0d2cd";
+/* Site Ready offline support (cache-first). Updates are fetched by the page; see checkForUpdate in app.js. */
+var CACHE = "site-ready-app";
 var FILES = ["./", "index.html", "manifest.webmanifest", "icons/icon-192.png", "icons/icon-512.png", "icons/icon-maskable-512.png", "icons/apple-touch-icon.png"];
 self.addEventListener("install", function (e) {
-  e.waitUntil(caches.open(CACHE).then(function (c) { return c.addAll(FILES); }).then(function () { return self.skipWaiting(); }));
+  e.waitUntil(caches.open(CACHE).then(function (c) {
+    return Promise.all(FILES.map(function (f) { return fetch(f, { cache: "no-store" }).then(function (r) { if (r.ok) return c.put(f, r); }); }));
+  }).then(function () { return self.skipWaiting(); }));
 });
 self.addEventListener("activate", function (e) {
   e.waitUntil(caches.keys().then(function (keys) {
@@ -10,13 +12,15 @@ self.addEventListener("activate", function (e) {
   }).then(function () { return self.clients.claim(); }));
 });
 self.addEventListener("fetch", function (e) {
-  var req = e.request;
-  if (req.method !== "GET" || new URL(req.url).origin !== location.origin) return;
+  var req = e.request, url = new URL(req.url);
+  if (req.method !== "GET" || url.origin !== location.origin) return;
+  if (url.pathname.endsWith("version.json") || url.search.indexOf("t=") >= 0) return;  // update checks always go to the network
   if (req.mode === "navigate") {
-    // Page: try the network first so updates arrive, fall back to the saved copy when offline
-    e.respondWith(fetch(req).then(function (res) {
-      var copy = res.clone(); caches.open(CACHE).then(function (c) { c.put("index.html", copy); }); return res;
-    }).catch(function () { return caches.match("index.html"); }));
+    e.respondWith(caches.open(CACHE).then(function (c) {
+      return c.match("index.html").then(function (hit) {
+        return hit || fetch(req).then(function (res) { c.put("index.html", res.clone()); return res; });
+      });
+    }));
     return;
   }
   e.respondWith(caches.match(req).then(function (hit) { return hit || fetch(req); }));

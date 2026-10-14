@@ -12,6 +12,7 @@
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-title" content="Site Ready">
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
+<script>window.SITE_BUILD="a414adb3d1b6";</script>
 <title>Site Ready – HS&amp;E Operatives Revision</title>
 <style>
 :root {
@@ -269,6 +270,8 @@ main { padding-bottom: calc(64px + env(safe-area-inset-bottom)); }
 .mode.m-progress { border-left-color: var(--green-ink); } .mode.m-progress .cta { color: var(--green-ink); }
 @media (min-width: 640px) { .mode.wide { grid-column: 1 / -1; } }
 
+.toast { position: fixed; left: 50%; bottom: calc(20px + env(safe-area-inset-bottom)); transform: translateX(-50%); background: var(--brand); color: #fff; padding: 10px 16px; border-radius: 10px; font-weight: 600; font-size: .9rem; z-index: 60; box-shadow: 0 4px 14px rgba(0,0,0,.25); transition: opacity .6s; }
+.toast.hide { opacity: 0; }
 @media print { .topbar, .actions { display: none; } }
 
 </style>
@@ -1562,10 +1565,10 @@ window.QUESTIONS = [
   q:"You are about to use a chemical that can splash. Which eye protection is most suitable?",
   options:["Chemical splash goggles that seal around the eyes","Sunglasses","Ordinary prescription glasses","No eye protection is needed if you work slowly and carefully"], answer:[0],
   why:"Different tasks need different eye protection. Goggles that seal around the eyes protect against splashes; the safety data sheet and COSHH assessment should state what is needed.", src:L.coshh, status:"reviewed" },
-{ id:"SA62", section:"sa", topic:"Tools & equipment", type:"single",
+{ id:"SA62", section:"sa", topic:"Slips & trips", type:"single",
   q:"Slips and trips are one of the most common causes of injury on site. What is the most effective way to prevent them?",
-  options:["Good housekeeping: keeping walkways clear and tidying as you go","Wearing gloves and safety boots at all times","Walking faster through cluttered areas","Putting up more warning signs around the site and at the main gate"], answer:[0],
-  why:"Keeping access routes clear, storing materials properly, removing waste and cleaning up spills stop most slips and trips.", src:L.hsg150, status:"reviewed" },
+  options:["Remove the cause: keep walkways clear, tidy as you go, and clean up spills straight away", "Put up 'slippery surface' and 'trip hazard' signs wherever they might happen", "Walk more slowly and watch where you are going", "Rely on everyone wearing safety boots with good grip, as that is the most effective control for both slips and trips"], answer:[0],
+  why:"Prevention means removing the hazard: good housekeeping, proper storage, clearing waste and cleaning spills at once. Slip-resistant footwear helps, but it doesn't remove the hazard. Warning signs are a last resort for a hazard that can't be removed straight away (such as a floor drying after cleaning); they don't prevent slips on their own.", src:L.hsg150, status:"draft" },
 /* ---------- v2: High-risk activities ---------- */
 { id:"HR17", section:"hr", topic:"Working at height", type:"single", fact:true,
   q:"On a working platform, what is the minimum height of the top guard rail required by the Work at Height Regulations?",
@@ -1927,7 +1930,107 @@ window.QUESTIONS = [
 { id:"HR75", section:"hr", topic:"Hazardous substances", type:"single", fact:true,
   q:"A product label shows a red-bordered diamond with a gas cylinder. What does it mean?",
   options:["The product is a gas under pressure, which may explode if heated","The product is flammable liquid","Empty containers can be refilled","The product contains compressed oxygen for breathing apparatus"], answer:[0],
-  why:"The CLP gas cylinder pictogram indicates a gas under pressure; it may explode if heated, and some are refrigerated and can cause cold burns.", src:{ t:"HSE: Hazard pictograms (CLP)", u:"https://www.hse.gov.uk/chemical-classification/labelling-packaging/hazard-symbols-hazard-pictograms.htm" }, status:"draft" }
+  why:"The CLP gas cylinder pictogram indicates a gas under pressure; it may explode if heated, and some are refrigerated and can cause cold burns.", src:{ t:"HSE: Hazard pictograms (CLP)", u:"https://www.hse.gov.uk/chemical-classification/labelling-packaging/hazard-symbols-hazard-pictograms.htm" }, status:"draft" },
+/* ---------- v2.5: gap topics found in the Hurak review (draft until reviewed) ---------- */
+{ id:"WE70", section:"we", topic:"Legal duties", type:"single",
+  q:"What is a 'dynamic' risk assessment?",
+  options:["A quick, ongoing check you make as conditions change during a task, on top of the written risk assessment", "A written risk assessment that is only reviewed once a year", "A replacement for the written risk assessment that a supervisor can use instead whenever there isn't time to write one up properly", "An assessment carried out by the HSE after an accident"], answer:[0],
+  why:"Conditions on site change: weather, other trades, new hazards. A dynamic risk assessment means staying alert and reassessing as you go. It does not replace the written risk assessment, and if something changes that the plan does not cover, stop and tell your supervisor.", src:L.mhsw, status:"draft" },
+{ id:"WE71", section:"we", topic:"Legal duties", type:"single",
+  q:"Why must an employer take extra care with workers under 18 on a construction site?",
+  options:["Their lack of experience and awareness of risks puts them at greater risk, so a specific risk assessment and closer supervision are needed", "The law bans anyone under 18 from working on a construction site at all, so any young person taken on must be kept in the site office away from the work", "Under-18s are not covered by health and safety law", "Under-18s only need extra care if they are working at height"], answer:[0],
+  why:"The Management of Health and Safety at Work Regulations require employers to assess the risks to young people, taking account of their inexperience and lack of awareness of risks, and to control those risks, for example with close supervision and limits on certain tasks.", src:L.mhsw, status:"draft" },
+{ id:"WE72", section:"we", topic:"Accident reporting", type:"single",
+  q:"What is the difference between an accident and a near miss?",
+  options:["An accident causes injury, ill health or damage; a near miss is an event that could have, but did not", "An accident is reported; a near miss is not reported", "An accident causes a major injury; a near miss causes a minor injury", "An accident is any event that gets recorded in the accident book; a near miss is an injury that was not serious enough to be written down"], answer:[0],
+  why:"A near miss is an unplanned event that did not cause harm but could have. Reporting near misses helps fix the cause before someone is hurt next time.", src:L.riddor, status:"draft" },
+{ id:"WE73", section:"we", topic:"Site rules & communication", type:"single",
+  q:"What is the difference between a risk assessment and a method statement?",
+  options:["A risk assessment identifies hazards and controls; a method statement sets out step by step how to do the job safely using those controls", "They are the same document with different names", "A method statement is only needed when the risk assessment is lost", "A risk assessment is written for site managers to keep in the office, while a method statement is a document produced only for the client's records"], answer:[0],
+  why:"The risk assessment works out what could cause harm and how to control it. The method statement (often combined as 'RAMS') turns that into a safe sequence of work that you are briefed on before you start.", src:L.hsg150, status:"draft" },
+{ id:"WE74", section:"we", topic:"Site rules & communication", type:"single",
+  q:"The fire alarm sounds and a fire warden (fire marshal) gives you instructions. What should you do?",
+  options:["Follow their instructions and go to the assembly point","Finish what you are doing first, then decide for yourself","Go back to the welfare cabin to collect your belongings","Ignore them unless they are your own supervisor"], answer:[0],
+  why:"Fire wardens are appointed to help clear the area, check nobody is left behind and direct people to the assembly point. Follow their instructions and do not go back for belongings.", src:L.hsg168, status:"draft" },
+
+{ id:"OH71", section:"oh", topic:"Health & wellbeing", type:"single",
+  q:"How does tetanus usually get into the body on a construction site?",
+  options:["Through cuts, grazes or puncture wounds contaminated with soil or dirt", "By breathing in cement dust", "By drinking from a tap that is not marked as drinking water, or by eating food in the welfare cabin without washing your hands", "Through the skin after working in the sun"], answer:[0],
+  why:"Tetanus bacteria live in soil and can enter through wounds, especially puncture wounds. Clean every wound, cover it, and get medical advice for a deep or dirty wound if you are not sure your tetanus vaccinations are up to date.", src:{ t:"NHS: Tetanus", u:"https://www.nhs.uk/conditions/tetanus/" }, status:"draft" },
+{ id:"OH72", section:"oh", topic:"Health & wellbeing", type:"single",
+  q:"Your doctor prescribes medicine that may make you drowsy. You operate a dumper on site. What should you do?",
+  options:["Tell your supervisor before starting work so they can decide if you need different duties", "Keep it to yourself, as medical matters are private", "Carry on as normal but take the medicine at lunchtime instead", "Only tell someone if you start to feel drowsy while driving, because until then the medicine is clearly not affecting your work"], answer:[0],
+  why:"Some medicines affect alertness and reaction times. You don't have to share details of your condition, but you must tell your supervisor if your ability to work safely could be affected, especially when operating plant.", src:L.drugs, status:"draft" },
+{ id:"OH73", section:"oh", topic:"Health & wellbeing", type:"single",
+  q:"You are returning to work after an injury, and your fit note says you may be fit for work with some changes. What should you do?",
+  options:["Give it to your supervisor and agree what you can and cannot do until you have fully recovered", "Go straight back to your usual tasks to show you are fit", "Stay at home until you are completely recovered, whatever the note says", "Keep the note to yourself and just avoid any tasks that hurt, because your employer has no right to know about your health"], answer:[0],
+  why:"A 'may be fit' fit note means you can work with adjustments such as lighter duties or shorter hours. Your employer needs to know about any restrictions so the work can be planned safely.", src:{ t:"GOV.UK: Fit note guidance", u:"https://www.gov.uk/government/collections/fit-note" }, status:"draft" },
+{ id:"OH74", section:"oh", topic:"Manual handling", type:"single",
+  q:"You need to lay heavy concrete kerbs. Which handling aid is designed for this?",
+  options:["A kerb lifter or vacuum lifter","A sack truck","A stepladder","A lifting belt worn round the waist"], answer:[0],
+  why:"Kerbs are heavy, awkward and often handled close to the ground. Mechanical kerb lifters and vacuum lifters take the weight off the body. Sack trucks suit bags and boxes, and pallet trucks suit pallets on level ground.", src:L.mh, status:"draft" },
+{ id:"OH75", section:"oh", topic:"Manual handling", type:"single",
+  q:"Does wearing a back-support belt let you lift heavier loads safely?",
+  options:["No; there is no good evidence that they prevent back injury, so the task must still be made safe", "Yes; it doubles the weight you can safely lift", "Yes, but only if the belt is worn tightly for the whole shift and is the type supplied by your employer for that purpose", "Yes, if it's issued by your employer"], answer:[0],
+  why:"HSE guidance is that back belts are not a reliable way to prevent injury and can give false confidence. Reduce the risk instead: use handling aids, split the load or get help.", src:L.mh, status:"draft" },
+
+{ id:"SA75", section:"sa", topic:"Fire prevention", type:"single",
+  q:"You notice frost or ice forming on the valve of a gas cylinder in use. What does this most likely mean?",
+  options:["Gas is leaking: keep ignition sources away, shut the cylinder valve if it is safe to do so, and report it", "The cylinder is full and working normally", "The cylinder is nearly empty and should be changed", "The cold weather is cooling the cylinder, which is normal in winter, so it can be ignored until the cylinder is changed"], answer:[0],
+  why:"Escaping gas cools rapidly as it expands, so frost or ice on a valve or connection usually means a leak. Leaking flammable gas can cause a fire or explosion, so act at once and report it.", src:L.hsg168, status:"draft" },
+{ id:"SA76", section:"sa", topic:"Tools & equipment", type:"single",
+  q:"A mixer has jammed. What must be done before anyone reaches in to clear it?",
+  options:["Switch it off, isolate it and lock it off so it cannot be restarted, following the site procedure", "Switch it off at the control button and reach in quickly", "Reach in carefully while it runs slowly", "Ask a colleague to stand by the start button and keep watch, so that it is safe to reach in while the power is still connected"], answer:[0],
+  why:"Machines can restart unexpectedly. Isolating the power and locking it off (keeping the key or lock yourself) stops anyone else from starting it while you are inside the danger zone.", src:L.puwer, status:"draft" },
+{ id:"SA77", section:"sa", topic:"Tools & equipment", type:"single",
+  q:"Why should spare power tool batteries not be carried loose in a tool bag?",
+  options:["Metal tools or screws can touch the terminals and short-circuit them, which can cause overheating or fire", "They will lose their charge more slowly", "They will be harder to find", "It is fine to carry them loose as long as the bag is zipped closed and kept out of the rain, because batteries only short-circuit when wet"], answer:[0],
+  why:"A short circuit across battery terminals can make a battery overheat or catch fire, especially lithium-ion. Fit terminal covers or carry batteries in their case, and don't use damaged ones.", src:L.hsg168, status:"draft" },
+{ id:"SA78", section:"sa", topic:"Electrical safety", type:"single",
+  q:"How do you check that a portable residual current device (RCD) is working?",
+  options:["Press its test button before use; it should trip straight away", "Look at it to see that the light is on", "Plug in a tool and see if the tool works", "Only an electrician can check an RCD, so it should be left alone until its annual inspection is due"], answer:[0],
+  why:"HSE advises pressing the RCD's test button before use. If it doesn't trip, don't use it: label it and report it.", src:L.hsg141, status:"draft" },
+{ id:"SA79", section:"sa", topic:"PPE", type:"single",
+  q:"How can you tell which type of gloves will protect you from a particular chemical?",
+  options:["Check the safety data sheet or COSHH assessment, which states the glove material needed", "Any thick glove will do", "Rigger gloves protect against all chemicals", "Choose the most comfortable gloves available, because any glove that you will keep wearing gives you good protection against chemicals"], answer:[0],
+  why:"Chemicals can soak through the wrong glove material. The safety data sheet and COSHH assessment specify what is suitable, such as nitrile, and how long the gloves last before they need changing.", src:L.coshh, status:"draft" },
+{ id:"SA80", section:"sa", topic:"PPE", type:"single",
+  q:"You are working in wet concrete. Which footwear is most suitable?",
+  options:["Waterproof safety wellingtons, with trousers worn over the top", "Leather safety boots", "Trainers that can be thrown away afterwards", "Steel-toe safety boots with the laces done up tightly, as the steel toe cap protects the foot from wet concrete"], answer:[0],
+  why:"Wet cement is alkaline and can cause serious burns if it gets into footwear. Steel toes protect against impact, not chemicals. Waterproof wellingtons with trousers over the top keep the concrete out.", src:L.skin, status:"draft" },
+{ id:"SA81", section:"sa", topic:"PPE", type:"single", fact:true,
+  q:"Which marking shows that PPE meets the required safety standards?",
+  options:["UKCA or CE marking","A manufacturer's logo","ISO 9001","The letters HSE"], answer:[0],
+  why:"PPE sold in Great Britain should carry the UKCA mark, or the CE mark, which is still accepted. It shows the product meets the required safety standards.", src:L.ppe, status:"draft" },
+{ id:"SA82", section:"sa", topic:"Slips & trips", type:"single",
+  q:"Someone has spilt oil across a walkway. What is the best action?",
+  options:["Make the area safe while it is cleaned up straight away, using signs or barriers only until the spill has gone", "Put a 'slippery surface' warning sign next to it and leave it there, as the sign is enough to stop anybody from slipping on the oil", "Cover it with cardboard so nobody can see it", "Leave it for the cleaners at the end of the day"], answer:[0],
+  why:"Signs warn people but don't remove the hazard. The spill must be cleaned up (with a spill kit for oil) and the cause dealt with. Signs or barriers are only a temporary measure while that happens.", src:L.hsg150, status:"draft" },
+
+{ id:"HR76", section:"hr", topic:"Hazardous substances", type:"single",
+  q:"Hydrogen sulphide can build up in sewers and drains. Why is it so dangerous?",
+  options:["It is toxic, and at high levels it deadens your sense of smell, so you can't rely on the 'rotten eggs' smell to warn you", "It is harmless but smells unpleasant", "It only causes skin irritation", "It is lighter than air, so it always rises out of a sewer when the cover is lifted, and the only real risk is to anyone standing directly above the opening"], answer:[0],
+  why:"Hydrogen sulphide is heavier than air and collects in low places. At high concentrations it quickly stops you smelling it and can cause sudden collapse and death. Only trained people with gas monitors should enter.", src:L.cs, status:"draft" },
+{ id:"HR77", section:"hr", topic:"Hazardous substances", type:"single",
+  q:"Methane can be found in sewers and on old landfill sites. What are its main dangers?",
+  options:["It is flammable and can explode, and it can push out the oxygen you need to breathe", "It is a strong-smelling gas that only causes headaches", "It is a heavy gas that sinks to the bottom of a sewer and corrodes metal, but it is not flammable and has no effect on breathing", "It's only dangerous if you swallow it"], answer:[0],
+  why:"Methane has no smell of its own. It can form an explosive mixture with air and can displace oxygen in a confined space. Atmospheres must be tested before and during entry.", src:L.cs, status:"draft" },
+{ id:"HR78", section:"hr", topic:"Hazardous substances", type:"single",
+  q:"Before anyone enters a confined space, how do you know the air is safe to breathe?",
+  options:["It is tested with a suitable gas monitor by a trained person before entry, and monitored while people are inside", "If it doesn't smell, it is safe", "If a lit match keeps burning, it is safe", "If the last person who went in came out without any problems, it is safe for the next person too, provided they don't stay any longer"], answer:[0],
+  why:"Many dangerous gases and a lack of oxygen can't be seen or smelt. The safe system of work will require testing before entry and continuous monitoring, as well as rescue arrangements.", src:L.cs, status:"draft" },
+{ id:"HR79", section:"hr", topic:"Hazardous substances", type:"single", fact:true,
+  q:"Roughly what percentage of normal air is oxygen?",
+  options:["About 21%","About 5%","About 50%","About 78%"], answer:[0],
+  why:"Normal air contains about 21% oxygen (78% is nitrogen). In a confined space, oxygen can be used up or pushed out by other gases, and low oxygen can cause collapse without warning. Gas monitors alarm if the level drops.", src:L.cs, status:"draft" },
+{ id:"HR80", section:"hr", topic:"Working at height", type:"single",
+  q:"A roof has panels of glass with wire mesh set into it (wired glass). Is it safe to walk on?",
+  options:["No; wired glass is fragile and will not take a person's weight, so treat it like any other fragile roof material", "Yes; the wire makes the glass strong enough to stand on", "Yes, if you stand only where the wires cross", "Yes, if the glass is dry, the weather is calm and you spread your weight by kneeling on a scaffold board laid across the panels"], answer:[0],
+  why:"The wire only holds the pieces together when the glass breaks, mainly for fire safety. It does not make the glass strong. HSE treats wired glass as a fragile material: never walk on it, and use staging, covers or netting.", src:L.hsg33, status:"draft" },
+{ id:"OH76", section:"oh", topic:"Dust & fumes", type:"single",
+  q:"You regularly breathe in small amounts of silica dust while cutting blocks. What is the likely long-term effect?",
+  options:["The damage builds up over time and can cause serious lung disease that can't be reversed","Your lungs gradually get used to the dust and build up a resistance to it, so the risk reduces each time","There is no effect, as long as each exposure is short and you feel fine afterwards","Any harm clears up fully within a few days once you stop the cutting work"], answer:[0],
+  why:"Dust damage is cumulative. Repeated small exposures to silica can scar the lungs over years, causing silicosis, COPD and lung cancer, often with no symptoms until it's too late. Some dusts, such as wood dust, are sensitisers, which makes you more sensitive over time, not more resistant. Control dust every time: water suppression or extraction, plus the right RPE.", src:L.rpe, status:"draft" },
 ];
 
 </script>
@@ -1936,7 +2039,7 @@ window.QUESTIONS = [
 (function () {
   "use strict";
 
-  var APP_VERSION = "2.4";
+  var APP_VERSION = "2.5.1";
   var STORE_KEY = "siteready.v1";
   var MOCK_QUESTIONS = 50;
   var MOCK_MINUTES = 45;
@@ -2090,6 +2193,7 @@ window.QUESTIONS = [
       if (b.getAttribute("data-go") === view) b.setAttribute("aria-current", "page"); else b.removeAttribute("aria-current");
     });
     (VIEWS[view] || VIEWS.home)(arg);
+    if (view === "home" && typeof applyUpdateIfSafe === "function" && updateReady) { applyUpdateIfSafe(); }
     window.scrollTo(0, 0);
     app.focus({ preventScroll: true });
   }
@@ -2642,7 +2746,61 @@ window.QUESTIONS = [
     if ("serviceWorker" in navigator) {
       window.addEventListener("load", function () { navigator.serviceWorker.register("sw.js").catch(function () {}); });
     }
+    startAutoUpdate();
     if (navigator.storage && navigator.storage.persist) { navigator.storage.persist().catch(function () {}); }
+  }
+
+  /* ---------------- automatic updates (web version only) ----------------
+     The app always opens instantly from the copy saved on the phone. In the background it
+     asks the website for a tiny version.json (bypassing every cache). If a newer build exists
+     it downloads it and switches over at a safe moment: straight away if you are still on the
+     Home screen, otherwise the next time you go back to Home. Mock exams are never interrupted. */
+  var UPDATE_CACHE = "site-ready-app", updateReady = false, lastCheck = 0;
+  function startAutoUpdate() {
+    if (!window.SITE_BUILD || !window.caches || !window.fetch) return;
+    checkForUpdate();
+    document.addEventListener("visibilitychange", function () { if (!document.hidden) checkForUpdate(); });
+    try {
+      if (sessionStorage.getItem("siteready.updated")) {
+        sessionStorage.removeItem("siteready.updated");
+        setTimeout(function () { toast("Updated to version " + APP_VERSION); }, 300);
+      }
+    } catch (e) {}
+  }
+  function checkForUpdate() {
+    if (updateReady || Date.now() - lastCheck < 60000) return;  // at most once a minute
+    lastCheck = Date.now();
+    var bust = "t=" + Date.now();
+    fetch("version.json?" + bust, { cache: "no-store" }).then(function (r) { return r.ok ? r.json() : null; }).then(function (v) {
+      if (!v || !v.build || v.build === window.SITE_BUILD) return;
+      return fetch("index.html?" + bust, { cache: "no-store" }).then(function (r) {
+        if (!r.ok) return;
+        return r.text().then(function (html) {
+          if (html.indexOf(v.build) < 0) return;  // half-deployed: try again later
+          var res = new Response(html, { headers: { "Content-Type": "text/html; charset=utf-8" } });
+          return caches.open(UPDATE_CACHE).then(function (c) {
+            return Promise.all([c.put("index.html", res.clone()), c.put("./", res)]);
+          }).then(function () { updateReady = true; applyUpdateIfSafe(); });
+        });
+      });
+    }).catch(function () { /* offline: try again next time */ });
+  }
+  function safeToReload() {
+    var onHome = !!app.querySelector("[data-mode=mock]");
+    return onHome && !session && document.getElementById("modal").hidden;
+  }
+  function applyUpdateIfSafe() {
+    if (!updateReady || !safeToReload()) return false;
+    try { sessionStorage.setItem("siteready.updated", "1"); } catch (e) {}
+    location.reload();
+    return true;
+  }
+  function toast(msg) {
+    var t = document.createElement("div");
+    t.className = "toast"; t.setAttribute("role", "status"); t.textContent = msg;
+    document.body.appendChild(t);
+    setTimeout(function () { t.classList.add("hide"); }, 2500);
+    setTimeout(function () { t.remove(); }, 3200);
   }
 
   function setTopbarHeight() {
@@ -2656,7 +2814,7 @@ window.QUESTIONS = [
   go("home");
 
   // Test hook (used by automated checks only)
-  window.__siteReady = { version: APP_VERSION, state: function () { return state; } };
+  window.__siteReady = { version: APP_VERSION, state: function () { return state; }, update: function () { return { ready: updateReady, lastCheck: lastCheck }; } };
 })();
 
 </script>
