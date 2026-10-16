@@ -12,7 +12,7 @@
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-title" content="Site Ready">
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
-<script>window.SITE_BUILD="a414adb3d1b6";</script>
+<script>window.SITE_BUILD="3b28418c5883";</script>
 <title>Site Ready – HS&amp;E Operatives Revision</title>
 <style>
 :root {
@@ -2031,6 +2031,183 @@ window.QUESTIONS = [
   q:"You regularly breathe in small amounts of silica dust while cutting blocks. What is the likely long-term effect?",
   options:["The damage builds up over time and can cause serious lung disease that can't be reversed","Your lungs gradually get used to the dust and build up a resistance to it, so the risk reduces each time","There is no effect, as long as each exposure is short and you feel fine afterwards","Any harm clears up fully within a few days once you stop the cutting work"], answer:[0],
   why:"Dust damage is cumulative. Repeated small exposures to silica can scar the lungs over years, causing silicosis, COPD and lung cancer, often with no symptoms until it's too late. Some dusts, such as wood dust, are sensitisers, which makes you more sensitive over time, not more resistant. Control dust every time: water suppression or extraction, plus the right RPE.", src:L.rpe, status:"draft" },
+/* ---------- v2.5.2: gaps found in Hurak's CITB-style set (draft until reviewed) ---------- */
+{ id:"WE75", section:"we", topic:"Environment & waste", type:"single",
+  q:"Old fluorescent light tubes are being removed. How should they be disposed of?",
+  options:["As hazardous waste, kept separate and unbroken, because they contain mercury", "In the general waste skip, as long as they are broken up into small pieces first to save space in the skip", "In the glass recycling skip with bottles and window glass", "Buried on site in the landscaping area before the topsoil goes down"], answer:[0],
+  why:"Fluorescent tubes contain mercury, so they are hazardous waste. Store them unbroken in a separate, labelled container for a licensed waste carrier. Breaking them releases mercury vapour.", src:{ t:"GOV.UK: Classify different types of waste", u:"https://www.gov.uk/how-to-classify-different-types-of-waste" }, status:"draft" },
+{ id:"WE76", section:"we", topic:"Environment & waste", type:"single",
+  q:"While digging, you uncover what look like old pottery and bones. What should you do?",
+  options:["Stop work in that area, leave the finds where they are and tell your supervisor","Carry on digging carefully and put the finds to one side for the site manager to look at later","Take them home, as finds on a construction site belong to whoever discovers them","Cover them back over with soil so that the programme of work isn't delayed"], answer:[0],
+  why:"Finds may be archaeologically important and can be protected by planning conditions or law, and possible human remains must be reported to the authorities. Leave everything in place and report it so the right people can assess it.", src:{ t:"Historic England: Archaeology and planning", u:"https://historicengland.org.uk/advice/planning/" }, status:"draft" },
+{ id:"SA83", section:"sa", topic:"Electrical safety", type:"single",
+  q:"You are using an extension cable reel to power a heater. Why should the cable be fully unwound?",
+  options:["A coiled cable can't lose heat, so it can overheat, melt and start a fire","Unwinding only the length you need is better, because it keeps the area tidy","It makes no difference as long as the reel has an RCD built into it","Only so that the cable is long enough to reach the socket"], answer:[0],
+  why:"When current flows through a cable left wound on its reel, the heat builds up and can melt the insulation or start a fire. Fully unwind the reel, especially for high-power equipment, and check its rating label.", src:L.hsg141, status:"draft" },
+{ id:"SA84", section:"sa", topic:"Slips & trips", type:"single",
+  q:"Extension leads need to run from the site cabin to your work area across a walkway. What is the best way to stop them causing trips?",
+  options:["Run them at high level or along walls, away from where people walk", "Put up a sign warning people of trailing cables on the walkway", "Cover them with loose boards or offcuts so that people can't see them and won't be tempted to step on them", "Coil any spare cable tightly in the middle of the walkway"], answer:[0],
+  why:"Routing leads at high level or along the edges of walls and floors removes the trip hazard. Where a cable must cross a walkway or vehicle route, use a proper cable protector or ramp. A sign alone doesn't remove the hazard.", src:L.hsg141, status:"draft" },
+{ id:"SA85", section:"sa", topic:"Tools & equipment", type:"single",
+  q:"The head of your cold chisel has spread out and split (a 'mushroomed' head). What is the danger?",
+  options:["Pieces of metal can break off when it is struck and fly into your eyes or skin", "The chisel will cut more slowly, but it is still safe to use", "It will make more noise when you hit it with a hammer", "There is no real danger as long as you wear gloves and keep hitting it squarely, so it can stay in use"], answer:[0],
+  why:"A mushroomed head can shatter when struck, throwing sharp fragments. Take the chisel out of use until the head has been ground back or the chisel replaced, and wear eye protection when using striking tools.", src:L.puwer, status:"draft" },
+{ id:"SA86", section:"sa", topic:"Tools & equipment", type:"single",
+  q:"The head of your hammer has worked loose on the handle. What should you do?",
+  options:["Stop using it and get it repaired or replaced","Keep using it, but warn people nearby that the head might come off","Tap the handle on the floor to tighten it and carry on working","Wrap tape round the joint and use it until the end of the day"], answer:[0],
+  why:"A loose head can fly off and hit you or someone else. Hand tools must be kept in good condition; take a damaged tool out of use and report it.", src:L.puwer, status:"draft" },
+{ id:"HR81", section:"hr", topic:"Site transport & lifting", type:"single",
+  q:"During a lift, the signaller raises both arms straight up above their head, palms facing forward. What does this signal mean?",
+  options:["Danger: emergency stop","Raise the load slowly","Lifting is complete for the day","Move the load to the right"], answer:[0],
+  why:"Under the Safety Signs and Signals Regulations, both arms raised upwards with palms forward is the 'danger / emergency stop' hand signal. All movement must stop at once.", src:L.signs, status:"draft" },
+/* ---------- v2.6: extra 'choose TWO' questions so mocks carry a realistic share (draft until reviewed) ---------- */
+{ id:"WE77", section:"we", topic:"Legal duties", type:"multi",
+  q:"Which TWO of these are your legal duties as an employee under the Health and Safety at Work Act?",
+  options:["Take reasonable care of your own health and safety and that of others affected by your work", "Co-operate with your employer on health and safety", "Write the risk assessments for the tasks you carry out", "Buy your own personal protective equipment for the job", "Report every accident you see directly to the Health and Safety Executive yourself, rather than to your employer"], answer:[0,1],
+  why:"Section 7 of the Act requires employees to take reasonable care of themselves and others, and to co-operate with their employer. Risk assessments, PPE and RIDDOR reporting are the employer's duties.", src:L.hswa, status:"draft" },
+{ id:"WE78", section:"we", topic:"Site rules & communication", type:"multi",
+  q:"You arrive on a new site for the first time. Which TWO things should you do before starting work?",
+  options:["Attend the site induction","Sign in, so you can be accounted for in an emergency","Start work straight away and catch the induction later in the week","Decide for yourself which of the site rules apply to your trade","Find the quickest way out to the car park for the end of the day"], answer:[0,1],
+  why:"The induction explains the site's hazards, rules and emergency arrangements. Signing in and out means people can be accounted for if the site has to be evacuated.", src:L.cdm, status:"draft" },
+{ id:"WE79", section:"we", topic:"Accident reporting", type:"multi",
+  q:"Which TWO pieces of information should be recorded in the accident book?",
+  options:["The date, time and place of the accident","What happened and what injury was caused","The injured person's bank details for any compensation claim","Who the witnesses think was to blame for it","The injured person's national insurance number"], answer:[0,1],
+  why:"An accident book entry records who was hurt, when and where it happened, how it happened and the injury. It records facts, not blame, and the information must be kept confidential.", src:L.riddor, status:"draft" },
+{ id:"WE80", section:"we", topic:"Accident reporting", type:"multi", fact:true,
+  q:"Which TWO of these must be reported to the HSE under RIDDOR?",
+  options:["A worker is unable to do their normal work for more than seven days after an accident", "A scaffold more than 5 metres high collapses", "A worker needs a plaster for a small cut and goes back to work", "A worker takes two days off work with a sprained wrist after slipping on the stairs, and then returns to normal duties", "A near miss in which nobody was hurt and no equipment was damaged"], answer:[0,1],
+  why:"Over-seven-day incapacitation injuries are reportable, and the collapse of a scaffold over 5 m is a 'dangerous occurrence'. Minor injuries and ordinary near misses are recorded and investigated on site but not reported to the HSE.", src:L.riddor, status:"draft" },
+{ id:"WE81", section:"we", topic:"Environment & waste", type:"multi",
+  q:"Which TWO of these help prevent water pollution from a construction site?",
+  options:["Store fuel in bunded tanks or on drip trays", "Wash out concrete mixers only in a designated washout area, away from drains", "Hose small fuel spills into the nearest surface water drain", "Store oil drums on the bank of the stream so deliveries are easier", "Wash out the concrete mixers in the road gully at the end of the day, because the rainwater will soon dilute it"], answer:[0,1],
+  why:"Bunds and drip trays catch leaks. Concrete washout is highly alkaline and harmful to rivers, so it must be contained and never allowed into surface water drains, which usually run straight to a watercourse.", src:L.epa, status:"draft" },
+{ id:"WE82", section:"we", topic:"Environment & waste", type:"multi",
+  q:"Which TWO of these help reduce the amount of waste produced on site?",
+  options:["Order only the materials you need","Store materials properly so they don't get damaged","Put all waste in one skip, so there is less sorting to do","Order plenty of extra materials, just in case","Burn timber offcuts on site to save on skip costs"], answer:[0,1],
+  why:"Over-ordering and poorly stored materials that get damaged are major sources of waste. Mixing waste stops it being recycled, and burning waste on site is usually illegal.", src:L.epa, status:"draft" },
+{ id:"WE83", section:"we", topic:"Site rules & communication", type:"multi",
+  q:"The fire alarm sounds while you are working. Which TWO things should you do?",
+  options:["Leave by the nearest safe exit and go to the assembly point","Make sure anyone nearby who seems unsure knows to leave too","Go back to the welfare cabin to collect your phone and keys","Try to put the fire out yourself before you leave","Wait to see whether it is a test or a false alarm before moving"], answer:[0,1],
+  why:"Leave straight away by a safe route and report to the assembly point so you can be accounted for. Helping others who seem unsure (without going back into danger) is part of taking care of others. Only trained people should fight a fire, and only if it is safe.", src:L.hsg168, status:"draft" },
+{ id:"WE84", section:"we", topic:"Welfare & first aid", type:"multi",
+  q:"You find a workmate injured on the ground. Which TWO things should you do first?",
+  options:["Check that it is safe for you to approach","Call for a first aider, or 999 if the injury is serious","Move them straight away, so they are more comfortable","Give them a drink of water and sit them up","Leave them while you go and finish the task you were doing"], answer:[0,1],
+  why:"Make sure you won't become a casualty yourself, then get help. Moving an injured person can make injuries such as spinal damage worse, and giving drinks can be dangerous if they need treatment.", src:L.fa, status:"draft" },
+{ id:"WE85", section:"we", topic:"Environment & waste", type:"multi",
+  q:"You find bats roosting in the roof space of a building you are working on. Which TWO things should you do?",
+  options:["Stop work in that area","Report it to your supervisor","Gently move the bats into a box so work can continue","Block up the gap they use to get in and out","Carry on quietly, as bats sleep during the day"], answer:[0,1],
+  why:"All bats and their roosts are protected by law; disturbing them or damaging a roost is an offence. Work must stop until advice has been taken, usually from a licensed ecologist.", src:L.wca, status:"draft" },
+
+{ id:"OH77", section:"oh", topic:"Dust & fumes", type:"multi",
+  q:"You are cutting concrete blocks. Which TWO of these are the best ways to reduce the dust you breathe in?",
+  options:["Use water suppression on the saw","Use on-tool dust extraction","Use a fan to blow the dust away from you","Work faster so the job takes less time","Dry sweep the area afterwards"], answer:[0,1],
+  why:"Controlling dust at source with water or extraction is the most effective approach, backed up by suitable RPE. Fans spread the dust, and dry sweeping puts it back into the air.", src:L.rpe, status:"draft" },
+{ id:"OH78", section:"oh", topic:"Noise & vibration", type:"multi",
+  q:"Which TWO of these can be signs that noise at work is damaging your hearing?",
+  options:["Ringing or buzzing in your ears (tinnitus)","Difficulty following conversations, especially in groups","Itchy skin on the backs of your hands","Blurred vision at the end of the day","A sore throat after the shift"], answer:[0,1],
+  why:"Tinnitus and struggling to hear conversations are typical signs of noise-induced hearing loss, which is permanent. Report symptoms and wear your hearing protection whenever it is required.", src:L.noise, status:"draft" },
+{ id:"OH79", section:"oh", topic:"Health & wellbeing", type:"multi",
+  q:"Which TWO of these help prevent dermatitis?",
+  options:["Wear suitable gloves when handling cement or chemicals", "Wash and dry your hands properly, then use an after-work cream", "Clean cement off your skin with thinners or white spirit", "Rely on a barrier cream rubbed in at the start of the shift instead of wearing gloves, as it lasts all day", "Leave wet cement on your skin until the end of the shift"], answer:[0,1],
+  why:"Avoiding skin contact and good skin care prevent dermatitis. Solvents strip the skin's natural oils, barrier creams are not a substitute for gloves, and wet cement can burn.", src:L.skin, status:"draft" },
+{ id:"OH80", section:"oh", topic:"Health & wellbeing", type:"multi",
+  q:"Which TWO of these help reduce your risk of catching leptospirosis (Weil's disease)?",
+  options:["Cover cuts and grazes with waterproof plasters","Wash your hands before eating, drinking or smoking","Rinse your hands in the water at the bottom of the excavation","Eat your lunch next to the work area to save time","Wear shorts in wet conditions so your clothes stay dry"], answer:[0,1],
+  why:"Leptospirosis is spread by the urine of rats and other animals, entering through cuts or the mouth, nose and eyes. Covering cuts and washing hands before eating are key precautions.", src:L.lepto, status:"draft" },
+{ id:"OH81", section:"oh", topic:"Manual handling", type:"multi",
+  q:"Which TWO things should you do before lifting a heavy load by hand?",
+  options:["Check the weight and plan the lift","Clear any obstructions along the route","Bend your back and keep your legs straight for leverage","Plan to twist your body to put it down quickly","Hold it away from your body so you can see your feet"], answer:[0,1],
+  why:"Planning the lift and the route reduces the chance of injury. Keep the load close, bend your knees, and move your feet rather than twisting.", src:L.mh, status:"draft" },
+{ id:"OH82", section:"oh", topic:"Noise & vibration", type:"multi",
+  q:"Which TWO of these tools are most likely to cause hand-arm vibration?",
+  options:["A concrete breaker","An angle grinder","A hand saw","A spirit level","A tape measure"], answer:[0,1],
+  why:"Powered tools such as breakers, hammer drills and grinders produce vibration that can cause HAVS with regular use. Hand tools like saws and measuring tools don't give significant vibration exposure.", src:L.vib, status:"draft" },
+{ id:"OH83", section:"oh", topic:"Noise & vibration", type:"multi",
+  q:"Which TWO of these help reduce the risk of hand-arm vibration syndrome?",
+  options:["Use low-vibration tools and keep them well maintained", "Limit the time you spend using the tool, for example by rotating tasks", "Grip the tool as hard as you can to control it", "Rely on a pair of anti-vibration gloves as your main protection, as they absorb most of the vibration", "Work with cold, wet hands so you stay alert"], answer:[0,1],
+  why:"Vibration exposure depends on the tool and how long you use it. Gripping tightly increases exposure, cold makes symptoms worse, and HSE says anti-vibration gloves can't be relied on to reduce vibration.", src:L.vib, status:"draft" },
+{ id:"OH84", section:"oh", topic:"Health & wellbeing", type:"multi",
+  q:"Which TWO of these statements about alcohol are true?",
+  options:["Alcohol can still be in your blood the morning after a night out", "Coffee or a cold shower won't sober you up any faster", "A good night's sleep removes all the alcohol from your body", "A small amount of alcohol before work helps you relax and improves your concentration on the job", "Alcohol is only a safety problem if you drink at work"], answer:[0,1],
+  why:"The body clears alcohol slowly, roughly one unit an hour, and nothing speeds that up. Drinking the night before can leave you over the limit and impaired at work the next morning.", src:L.drugs, status:"draft" },
+{ id:"OH85", section:"oh", topic:"Asbestos", type:"multi",
+  q:"You uncover material you think might contain asbestos. Which TWO things should you do?",
+  options:["Stop work straight away","Report it to your supervisor","Sweep up any loose dust and debris","Break off a small piece to take for testing","Damp it down and carry on working"], answer:[0,1],
+  why:"Leave suspected asbestos undisturbed, keep others away and report it. Only trained people should sample it, and any licensed work must be done by a licensed contractor.", src:L.asb, status:"draft" },
+
+{ id:"SA87", section:"sa", topic:"Tools & equipment", type:"multi",
+  q:"Which TWO checks should you make before using a power tool?",
+  options:["Check the cable and plug for damage","Check the guards are fitted and working","Remove the guard so you can see what you are cutting","Wrap tape round any cuts in the cable","Check that it runs on 230 volts"], answer:[0,1],
+  why:"A quick pre-use check of cables, plugs and guards finds most dangerous faults. Damaged equipment should be taken out of use and reported, not taped up.", src:L.puwer, status:"draft" },
+{ id:"SA88", section:"sa", topic:"Electrical safety", type:"multi", fact:true,
+  q:"Which TWO of these power supplies are the safer choices for portable tools on site?",
+  options:["Battery-powered tools","110 volt tools supplied through a transformer (yellow plugs)","230 volt mains tools plugged straight into the cabin","400 volt three-phase (red plugs) for hand-held tools","240 volt domestic extension leads"], answer:[0,1],
+  why:"Battery tools remove the risk from trailing mains cables, and the 110 V reduced-low-voltage system limits the shock voltage to about 55 V to earth. 230 V tools need RCD protection, and 400 V supplies are for large fixed plant.", src:L.hsg141, status:"draft" },
+{ id:"SA89", section:"sa", topic:"Fire prevention", type:"multi", fact:true,
+  q:"Which TWO types of fire extinguisher can be used on an electrical fire?",
+  options:["Carbon dioxide (black label)","Dry powder (blue label)","Water (red label)","Foam (cream label)","Wet chemical (yellow label)"], answer:[0,1],
+  why:"CO2 and dry powder don't conduct electricity. Water and foam extinguishers can give you an electric shock, and wet chemical extinguishers are for cooking oil fires.", src:L.hsg168, status:"draft" },
+{ id:"SA90", section:"sa", topic:"Fire prevention", type:"multi",
+  q:"Which TWO of these help reduce the risk of fire on site?",
+  options:["Clear away waste regularly", "Keep flammable materials in a designated store away from ignition sources", "Prop fire doors open to improve ventilation", "Store LPG cylinders inside the site cabins overnight", "Smoke only in the area next to the skip, so that you are well away from the buildings and the materials store"], answer:[0,1],
+  why:"Build-up of combustible waste and poorly stored flammables are among the biggest fire risks on site. Fire doors must stay closed, and gas cylinders must be stored outside in a secure, ventilated compound.", src:L.hsg168, status:"draft" },
+{ id:"SA91", section:"sa", topic:"PPE", type:"multi",
+  q:"Which TWO of these statements about safety helmets are correct?",
+  options:["Check it for cracks and damage before you wear it","Replace it after a heavy blow, even if you can't see any damage","Wear a baseball cap under it to keep warm","Drill a few holes in it for ventilation","Paint it in your own colours so it's easy to recognise"], answer:[0,1],
+  why:"A helmet that has taken a heavy blow may be weakened inside. Caps underneath, holes and paint (some paints and solvents attack the shell) all reduce the protection it gives.", src:L.ppe, status:"draft" },
+{ id:"SA92", section:"sa", topic:"PPE", type:"multi",
+  q:"Which TWO of these are your employer's duties for PPE?",
+  options:["Provide the PPE you need free of charge", "Give you information and training on how to use it", "Take the cost of any replacement PPE out of your wages if you lose or damage the items you were given", "Provide it only if you ask for it in writing", "Provide it only to subcontractors"], answer:[0,1],
+  why:"Where PPE is needed, the employer must provide it free, make sure it fits and is suitable, and train you to use and look after it. Employees must wear it as instructed and report damage.", src:L.ppe, status:"draft" },
+{ id:"SA93", section:"sa", topic:"Slips & trips", type:"multi",
+  q:"Which TWO of these are the most effective ways to prevent slips on site?",
+  options:["Clean up spills straight away","Put down hardcore or gravel on muddy walkways","Put up 'slippery surface' signs and leave it at that","Walk quickly across wet areas to spend less time on them","Cover wet patches with cardboard"], answer:[0,1],
+  why:"Prevention means removing the hazard: clean up spills and give muddy routes a firm, grippy surface. Signs only warn people, and cardboard can become a slip hazard itself.", src:L.hsg150, status:"draft" },
+{ id:"SA94", section:"sa", topic:"Electrical safety", type:"multi",
+  q:"You find a cut in the outer cover of an extension lead. Which TWO things should you do?",
+  options:["Stop using it","Label it as faulty and report it","Wrap insulating tape around the cut and carry on","Keep using it if the inner wires can't be seen","Pass it to a colleague who needs a lead"], answer:[0,1],
+  why:"Damaged leads can give a fatal shock. Take the lead out of use, label it so nobody else picks it up, and report it so it can be repaired or replaced by a competent person.", src:L.hsg141, status:"draft" },
+{ id:"SA95", section:"sa", topic:"Safety signs", type:"multi", fact:true,
+  q:"Which TWO of these statements about safety sign shapes and colours are correct?",
+  options:["A blue circle shows something you must do","A red circle with a diagonal line shows something you must not do","A green square shows a warning of danger","A yellow triangle shows something you must do","A red square shows first aid equipment"], answer:[0,1],
+  why:"Blue circles are mandatory, red circles with a bar are prohibition, yellow triangles are warnings, green signs show safe conditions such as first aid and exits, and red squares show fire equipment.", src:L.signs, status:"draft" },
+
+{ id:"HR82", section:"hr", topic:"Hazardous substances", type:"multi",
+  q:"Which TWO of these must be in place before anyone enters a confined space?",
+  options:["A safe system of work, including testing the air","Emergency and rescue arrangements","Someone nearby who can shout down to you every few minutes","A lit match to show there is enough oxygen","Nothing, as long as you will only be inside for a few minutes"], answer:[0,1],
+  why:"The Confined Spaces Regulations require a safe system of work (often a permit with gas testing) and suitable rescue arrangements before entry. Many deaths are would-be rescuers going in without them.", src:L.cs, status:"draft" },
+{ id:"HR83", section:"hr", topic:"Excavations & services", type:"multi",
+  q:"Which TWO of these help prevent an excavation collapsing?",
+  options:["Support the sides, or batter them back to a safe angle","Keep spoil heaps and plant back from the edge","Assume trenches under 1.2 metres deep are safe without support","Park the excavator at the edge so it is close to the work","Remove supports as soon as the pipe has been laid, before backfilling"], answer:[0,1],
+  why:"Unsupported sides can collapse at any depth. Loads close to the edge (spoil, materials, plant) add pressure and make collapse more likely.", src:L.hsg150, status:"draft" },
+{ id:"HR84", section:"hr", topic:"Excavations & services", type:"multi",
+  q:"Before digging, which TWO things should be done to avoid striking buried services?",
+  options:["Check the service plans for the area","Scan the area with a cable avoidance tool (CAT) and signal generator","Dig a trial hole quickly with the excavator to see what is there","Assume there are no services if none are shown on the plans","Use a pick to feel for anything hard below the surface"], answer:[0,1],
+  why:"HSG47 sets out plans, locating (CAT and Genny) and safe digging. Plans can be wrong or incomplete, so services are traced on site and exposed by careful hand digging.", src:L.hsg47, status:"draft" },
+{ id:"HR85", section:"hr", topic:"Working at height", type:"multi",
+  q:"Which TWO of these are safe practice when working from a ladder?",
+  options:["Keep three points of contact where possible", "Keep your body between the stiles and don't overreach", "Stand on the top three rungs to reach higher", "Carry heavy materials up in both hands", "Stand the ladder on a few bricks or blocks to level it up when the ground underneath is soft or uneven"], answer:[0,1],
+  why:"HSE ladder guidance: maintain three points of contact, keep your belt buckle within the stiles, never use the top three rungs, and stand the ladder on firm, level ground.", src:L.ladder, status:"draft" },
+{ id:"HR86", section:"hr", topic:"Working at height", type:"multi",
+  q:"You notice a guard rail has been removed from the scaffold you're working on. Which TWO things should you do?",
+  options:["Keep off that part of the scaffold","Report it to your supervisor","Refit the guard rail yourself, as it only takes a minute","Carry on carefully, keeping away from the edge","Tie a length of rope across the gap"], answer:[0,1],
+  why:"Only competent scaffolders should alter a scaffold. Stay away from the unprotected edge and report it so it can be put right and the scaffold re-inspected.", src:L.wah, status:"draft" },
+{ id:"HR87", section:"hr", topic:"Working at height", type:"multi",
+  q:"Which TWO of these statements about using a boom-type MEWP are correct?",
+  options:["Only trained, authorised operators should use it", "People in the basket should wear a harness with a short restraint lanyard attached inside the basket", "You can stand on the guard rails to get a little extra reach", "It's fine to carry a load a little heavier than the rated capacity in the basket, as long as it is only for a short time", "It can be driven with the platform raised over rough ground"], answer:[0,1],
+  why:"A boom MEWP can catapult people out of the basket if it jolts. A short restraint lanyard keeps you inside. Never climb on the rails, overload it, or travel raised on uneven ground.", src:L.wah, status:"draft" },
+{ id:"HR88", section:"hr", topic:"Site transport & lifting", type:"multi",
+  q:"Which TWO of these help reduce the risk of reversing accidents on site?",
+  options:["A one-way traffic system","A trained vehicle marshal (banksman) where reversing can't be avoided","Walking behind the vehicle to guide the driver","Relying on the reversing alarm alone","Asking drivers to reverse faster to clear the area quickly"], answer:[0,1],
+  why:"One-way systems and drive-through layouts remove the need to reverse. Where reversing is needed, a trained marshal standing in a safe position controls the manoeuvre.", src:L.trans, status:"draft" },
+{ id:"HR89", section:"hr", topic:"Site transport & lifting", type:"multi",
+  q:"Which TWO of these statements about lifting operations are correct?",
+  options:["Never walk or stand under a suspended load","Lifts must be planned by a competent person","Anyone nearby can give signals to the crane operator","Small loads can go above the safe working load for a short lift","It's fine to ride on the hook if you hold on tight"], answer:[0,1],
+  why:"LOLER requires lifts to be properly planned, supervised and carried out safely by competent people. Only the appointed signaller should direct the operator, and equipment must never be overloaded.", src:L.loler, status:"draft" },
+{ id:"HR90", section:"hr", topic:"Hazardous substances", type:"multi",
+  q:"Which TWO documents tell you how to use a hazardous substance safely?",
+  options:["The safety data sheet","The COSHH assessment","The delivery note","The price label on the container","The site sign-in sheet"], answer:[0,1],
+  why:"The supplier's safety data sheet describes the hazards and precautions, and your employer's COSHH assessment sets out how the substance will be used safely on your job.", src:L.coshh, status:"draft" },
 ];
 
 </script>
@@ -2039,7 +2216,7 @@ window.QUESTIONS = [
 (function () {
   "use strict";
 
-  var APP_VERSION = "2.5.1";
+  var APP_VERSION = "2.6";
   var STORE_KEY = "siteready.v1";
   var MOCK_QUESTIONS = 50;
   var MOCK_MINUTES = 45;
@@ -2150,13 +2327,39 @@ window.QUESTIONS = [
   function pickMock() {
     var keys = Object.keys(SECTIONS);
     var total = Math.min(MOCK_QUESTIONS, QS.length);
-    var bySec = {}; keys.forEach(function (k) { bySec[k] = shuffle(QS.filter(function (q) { return q.section === k; }).map(function (q) { return q.id; })); });
-    var chosen = [], i = 0, guard = 0, signs = 0, MAX_SIGNS = 5;  // keep sign questions to a realistic share
-    while (chosen.length < total && guard < 10000) {
-      var k = keys[i % keys.length];
-      while (bySec[k].length && BY_ID[bySec[k][0]].topic === "Safety signs" && signs >= MAX_SIGNS) bySec[k].shift();
-      if (bySec[k].length) { var id = bySec[k].shift(); if (BY_ID[id].topic === "Safety signs") signs++; chosen.push(id); }
+    var MAX_SIGNS = 5;                 // keep sign questions to a realistic share
+    var MIN_MULTI = 6, MAX_MULTI = 9;  // 'choose TWO' questions: about 12-18% of a mock
+    function isMulti(id) { return BY_ID[id].answer.length > 1; }
+    function isSign(id) { return BY_ID[id].topic === "Safety signs"; }
+    var multi = {}, single = {}, count = {};
+    keys.forEach(function (k) {
+      var ids = QS.filter(function (q) { return q.section === k; }).map(function (q) { return q.id; });
+      multi[k] = shuffle(ids.filter(isMulti));
+      single[k] = shuffle(ids.filter(function (id) { return !isMulti(id); }));
+      count[k] = 0;
+    });
+    var chosen = [], signs = 0;
+    function take(id, k) { chosen.push(id); count[k]++; if (isSign(id)) signs++; }
+    // 1) the multi-answer quota, spread round the sections
+    var target = MIN_MULTI + Math.floor(Math.random() * (MAX_MULTI - MIN_MULTI + 1));
+    var order = shuffle(keys.slice()), i = 0, guard = 0, got = 0;
+    while (got < target && guard < 1000) {
+      var k = order[i % order.length];
+      if (multi[k].length) { take(multi[k].shift(), k); got++; }
       i++; guard++;
+    }
+    // 2) fill with single-answer questions, always topping up the section with the fewest
+    guard = 0;
+    while (chosen.length < total && guard < 10000) {
+      guard++;
+      var avail = keys.filter(function (k) {
+        while (single[k].length && isSign(single[k][0]) && signs >= MAX_SIGNS) single[k].shift();
+        return single[k].length > 0;
+      });
+      if (!avail.length) break;
+      avail.sort(function (a, b) { return count[a] - count[b]; });
+      var kk = avail[0];
+      take(single[kk].shift(), kk);
     }
     return shuffle(chosen);
   }
